@@ -12,7 +12,8 @@ import edu.wpi.first.wpilibj.PS4Controller.Button;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 
 import frc.robot.lib.Controllers;
-
+import frc.robot.Subsystems.Arm.ArmSubsystem;
+import frc.robot.Subsystems.Arm.states.ManualArmState;
 import frc.robot.Subsystems.Drivetrain.DrivetrainSubsystem;
 import frc.robot.Subsystems.Drivetrain.states.OpenLoopState;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -30,6 +31,7 @@ public class RobotContainer {
 
 
   DrivetrainSubsystem drive;
+  ArmSubsystem arm;
 
   PowerDistribution powerDistrubutionBoard;
 
@@ -43,7 +45,7 @@ public class RobotContainer {
 
   public void initilizeSubsystems(){
     drive = DrivetrainSubsystem.getInstance();
-
+    arm = ArmSubsystem.getInstance();
   }
 
   public void initilizePowerDistrubutionBoard(){
@@ -53,7 +55,7 @@ public class RobotContainer {
 
   public void setAllDefaultCommands(){
     setDefaultCommand(drive, new OpenLoopState());
-
+    setDefaultCommand(arm, new ManualArmState());
   }
 
   public void setDefaultCommand(Subsystem subsystem, Command defaultCommand){
@@ -70,11 +72,11 @@ public class RobotContainer {
     Joystick drive_joystick = Controllers.getDriverController();
     Joystick op_joystick = Controllers.getOperatorController();
 
-  }
-
- 
+  } 
   // public Command getAutonomousCommand() {
   //   // An ExampleCommand will run in autonomous
   //   //return new ScoreAndDriveBackwards();
   // }
+
+
 }
