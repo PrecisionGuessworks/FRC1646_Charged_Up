@@ -16,4 +16,11 @@ public class Constants {
           LOW, HIGH
       }
    }
+
+   public static final class WristConstants{
+      public static final double LEFT_LIMIT = 1000;
+      public static final double RIGHT_LIMIT = 20000;
+      public static final double UPPER_LIMIT = 20000;
+      public static final double LOWER_LIMIT = 1000;
+   }
 }

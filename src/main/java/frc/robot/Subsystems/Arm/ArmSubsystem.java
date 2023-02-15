@@ -22,19 +22,34 @@ import frc.robot.lib.TalonFXFactory;
 public class ArmSubsystem extends SubsystemBase {
 
   private static ArmSubsystem instance;
-  private TalonFX armStage0LeftMotor, armStage0RightMotor;
+  private TalonFX armStage0LeftMotor, armStage0RightMotor, armStage1LeftMotor, armStage1RightMotor;
   
   private ArmSubsystem() {
+
+    //Stage 0 to 1
     armStage0LeftMotor = TalonFXFactory.makeTalonFX(RobotMap.ARM_STAGE0_LEFT_ID); 
     armStage0RightMotor = TalonFXFactory.makeTalonFX(RobotMap.ARM_STAGE0_RIGHT_ID); 
+
+    // Stage 1 to 2
+    armStage1LeftMotor = TalonFXFactory.makeTalonFX(RobotMap.ARM_STAGE1_LEFT_ID); 
+    armStage1RightMotor = TalonFXFactory.makeTalonFX(RobotMap.ARM_STAGE1_RIGHT_ID);
 
     armStage0LeftMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
     armStage0RightMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
 
+    armStage1LeftMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
+    armStage1RightMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
+
     armStage0LeftMotor.setInverted(TalonFXInvertType.CounterClockwise);
     armStage0RightMotor.setInverted(TalonFXInvertType.Clockwise);
+    armStage1LeftMotor.setInverted(TalonFXInvertType.CounterClockwise);
+    armStage1RightMotor.setInverted(TalonFXInvertType.Clockwise);
+
+
     armStage0LeftMotor.setNeutralMode(NeutralMode.Brake);
     armStage0RightMotor.setNeutralMode(NeutralMode.Brake);
+    armStage1LeftMotor.setNeutralMode(NeutralMode.Brake);
+    armStage1RightMotor.setNeutralMode(NeutralMode.Brake);
   }
 
   public static ArmSubsystem getInstance(){

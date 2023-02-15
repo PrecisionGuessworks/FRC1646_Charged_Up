@@ -16,6 +16,8 @@ import frc.robot.Subsystems.Arm.ArmSubsystem;
 import frc.robot.Subsystems.Arm.states.ManualArmState;
 import frc.robot.Subsystems.Drivetrain.DrivetrainSubsystem;
 import frc.robot.Subsystems.Drivetrain.states.OpenLoopState;
+import frc.robot.Subsystems.Wrist.WristSubsystem;
+import frc.robot.Subsystems.Wrist.states.ManualWristState;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -32,7 +34,7 @@ public class RobotContainer {
 
   DrivetrainSubsystem drive;
   ArmSubsystem arm;
-
+  WristSubsystem wrist;
   PowerDistribution powerDistrubutionBoard;
 
 
@@ -46,6 +48,7 @@ public class RobotContainer {
   public void initilizeSubsystems(){
     drive = DrivetrainSubsystem.getInstance();
     arm = ArmSubsystem.getInstance();
+    wrist = WristSubsystem.getInstance();
   }
 
   public void initilizePowerDistrubutionBoard(){
@@ -56,6 +59,7 @@ public class RobotContainer {
   public void setAllDefaultCommands(){
     setDefaultCommand(drive, new OpenLoopState());
     setDefaultCommand(arm, new ManualArmState());
+    setDefaultCommand(wrist, new ManualWristState());
   }
 
   public void setDefaultCommand(Subsystem subsystem, Command defaultCommand){
