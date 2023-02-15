@@ -57,7 +57,7 @@ public class RobotContainer {
   }
 
   public void setAllDefaultCommands(){
-    setDefaultCommand(drive, new OpenLoopState());
+    setDefaultCommand(drive, new OpenLoopState(Controllers.getDriverController().getRawAxis(Controllers.PS4_Controller.Axis.LEFT_STICK_Y), Controllers.getDriverController().getRawAxis(Controllers.PS4_Controller.Axis.RIGHT_STICK_X)));
     setDefaultCommand(arm, new ManualArmState());
     setDefaultCommand(wrist, new ManualWristState());
   }

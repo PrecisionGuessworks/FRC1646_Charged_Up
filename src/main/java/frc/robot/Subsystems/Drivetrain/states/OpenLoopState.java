@@ -12,15 +12,16 @@ import frc.robot.Subsystems.Drivetrain.DrivetrainSubsystem;
 public class OpenLoopState extends CommandBase {
 
   DrivetrainSubsystem drive = DrivetrainSubsystem.getInstance();
+  double throttle, rotation;
 
-  public OpenLoopState() {
+  public OpenLoopState(double throttle, double rotation) {
+    this.throttle = throttle;
+    this.rotation = rotation;
     addRequirements(drive);
   }
 
   @Override
   public void execute() {
-    double throttle = Controllers.getDriverController().getRawAxis(Controllers.PS4_Controller.Axis.LEFT_STICK_Y);
-    double rotation = 1.0 * Controllers.getDriverController().getRawAxis(Controllers.PS4_Controller.Axis.RIGHT_STICK_X);
     drive.curvatureDrive(throttle * DriveConstants.THROTTLE_SCALER, rotation * DriveConstants.ROTATION_SCALE);
   }
   
