@@ -23,6 +23,12 @@ public class IntakeSubsystem extends SubsystemBase {
         }
         return instance;
     }
+
+    public void setPower(double power) {
+        leftIntake.set(power);
+        rightIntake.set(power);
+    }
+
     
     @Override
     public void periodic() {
