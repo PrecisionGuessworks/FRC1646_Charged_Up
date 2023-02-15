@@ -14,9 +14,11 @@ public class ManualIntakeState extends CommandBase {
 
     @Override
     public void execute() {
-        if (Controllers.getOperatorController().getRawButtonPressed(Controllers.PS4_Controller.Button.SQUARE)) {
+        // TODO: Change these buttons
+
+        if (Controllers.getOperatorController().getRawButtonPressed(Controllers.PS4_Controller.Button.R1_Bumper)) {
             intake.setPower(IntakeConstants.INTAKING_SPEED);
-        } else if (Controllers.getOperatorController().getRawButtonPressed(Controllers.PS4_Controller.Button.CIRCLE)) {
+        } else if (Controllers.getOperatorController().getRawButtonPressed(Controllers.PS4_Controller.Button.L1_Bumper)) {
             intake.setPower(IntakeConstants.OUTTAKING_SPEED);
         } else {
             intake.setPower(0);

@@ -1,11 +1,13 @@
 package frc.robot.lib;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PS4Controller;
 
 public class Controllers {
 
     private static Joystick driverController;
     private static Joystick operatorController;
+    private static PS4Controller driverControllerNew;
 
     private static final int DRIVE_CONTROLLER_ID = 0;
     private static final int OPERATOR_CONTROLLER_ID = 1;
@@ -39,8 +41,8 @@ public class Controllers {
             public static final int X = 1;
             public static final int CIRCLE = 2;
             public static final int TRIANGLE = 4;
-            public static final int Left_Button_1 = 5;
-            public static final int Right_Button_1 = 6;
+            public static final int L1_Bumper = 5;
+            public static final int R1_Bumper = 6;
             public static final int SHARE = 7;
             public static final int OPTIONS = 8;
             public static final int L_Joy_Button = 9;
