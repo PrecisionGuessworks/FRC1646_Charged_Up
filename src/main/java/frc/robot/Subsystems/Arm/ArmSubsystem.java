@@ -59,29 +59,51 @@ public class ArmSubsystem extends SubsystemBase {
     return instance;
   }
 
-  public void setPower(double power){
-    if (power > 0.0 && getPosition() > Constants.ArmConstants.UPPER_LIMIT){
-        armStage0LeftMotor.set(ControlMode.PercentOutput, 0.0);
-        armStage0RightMotor.set(ControlMode.PercentOutput, 0.0);
-    }else if(power < 0.0 && getPosition() < Constants.ArmConstants.LOWER_LIMIT){
-      // Not set to zero as the arm is slightly bouncing when we drive
-      armStage0RightMotor.set(ControlMode.PercentOutput, ArmConstants.HOLD_DOWN_POWER);
-      armStage0LeftMotor.set(ControlMode.PercentOutput, ArmConstants.HOLD_DOWN_POWER);
+  public void setShoulderPower(double power){
+    if (power > 0.0 && getShoulderPosition() > Constants.ArmConstants.SHOULDER_HIGH_LIMIT){
+      armStage0LeftMotor.set(ControlMode.PercentOutput, 0.0);
+      armStage0RightMotor.set(ControlMode.PercentOutput, 0.0);
+    }else if(power < 0.0 && getShoulderPosition() < Constants.ArmConstants.SHOULDER_LOW_LIMIT){
+      armStage0RightMotor.set(ControlMode.PercentOutput, ArmConstants.SHOULDER_HOLD_POWER);
+      armStage0LeftMotor.set(ControlMode.PercentOutput, ArmConstants.SHOULDER_HOLD_POWER);
     }else{
-        armStage0LeftMotor.set(ControlMode.PercentOutput, power);
-        armStage0RightMotor.set(ControlMode.PercentOutput, power);
-    }
-    
+      armStage0LeftMotor.set(ControlMode.PercentOutput, power);
+      armStage0RightMotor.set(ControlMode.PercentOutput, power);
+    } 
   }
 
-  public void setPosition(double position){
+  public void setShoulderPosition(double position){
     armStage0LeftMotor.set(ControlMode.Position, position);
     armStage0RightMotor.set(ControlMode.Position, position);
   }
 
-  public double getPosition(){
+  public double getShoulderPosition(){
     return armStage0LeftMotor.getSelectedSensorPosition();
   }
+
+
+  public void setElbowPower(double power){
+    if (power > 0.0 && getElbowPosition() > Constants.ArmConstants.ELBOW_HIGH_LIMIT){
+      armStage1LeftMotor.set(ControlMode.PercentOutput, 0.0);
+      armStage1RightMotor.set(ControlMode.PercentOutput, 0.0);
+    }else if(power < 0.0 && getElbowPosition() < Constants.ArmConstants.ELBOW_LOW_LIMIT){
+      armStage1LeftMotor.set(ControlMode.PercentOutput, ArmConstants.ELBOW_HOLD_POWER);
+      armStage1RightMotor.set(ControlMode.PercentOutput, ArmConstants.ELBOW_HOLD_POWER);
+    }else{
+      armStage1LeftMotor.set(ControlMode.PercentOutput, power);
+      armStage1RightMotor.set(ControlMode.PercentOutput, power);
+    } 
+  }
+
+  public void setElbowPosition(double position) {
+    armStage1LeftMotor.set(ControlMode.Position, position);
+    armStage1RightMotor.set(ControlMode.Position, position);
+  }
+
+  public double getElbowPosition() {
+    return armStage1LeftMotor.getSelectedSensorPosition();
+  }
+
 
   @Override
   public void periodic() {
