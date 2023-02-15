@@ -7,20 +7,40 @@ public class Constants {
    } 
 
    public static final class ArmConstants{
-      public static final double UPPER_LIMIT = 45000.0;//-7846.0;
-      public static final double LOWER_LIMIT = 1000.0;//-53587.0;
+      // Stage 0
+      public static final double SHOULDER_HIGH_LIMIT = 45000;
+      public static final double SHOULDER_LOW_LIMIT = 45000;
+
+      public static final double ELBOW_HIGH_LIMIT = 45000.0;//-7846.0;
+      public static final double ELBOW_LOW_LIMIT = 1000.0;//-53587.0;
 
       public static final double HOLD_DOWN_POWER = -0.13;
 
       public static enum ArmPosition{
-          LOW, HIGH
+          STOWED, HIGH_NODE, MED_NODE, MED_CUBE, HIGH_CUBE, GROUND_SCORE, FEEDER_STATION
+          // WHAT ARE THESE SCORING LOCATIONS CALLED???
       }
    }
 
    public static final class WristConstants{
-      public static final double LEFT_LIMIT = 1000;
-      public static final double RIGHT_LIMIT = 20000;
-      public static final double UPPER_LIMIT = 20000;
-      public static final double LOWER_LIMIT = 1000;
+      public static final double LEFT_SUPINATION_LIMIT = 1000;
+      public static final double RIGHT_SUPINATION_LIMIT = 20000;
+      public static final double UPPER_FLEXION_LIMIT = 20000;
+      public static final double LOWER_FLEXION_LIMIT = 1000;
+
+      public static enum WristFlexionPosition{
+         STRAIGHT_OUT, FEEDER
+         // idk, maybe
+      }
+      public static enum WristSupinationPosition{
+         NINETY_LEFT, NINETY_RIGHT, LEVEL
+         // idk, maybe
+      }
+
+   }
+
+   public static final class IntakeConstants {
+      public static final double INTAKING_SPEED = 0.8;
+      public static final double OUTTAKING_SPEED = -0.8;
    }
 }
