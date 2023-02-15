@@ -13,6 +13,11 @@ public class ManualWristState extends CommandBase{
 
     @Override
     public void execute() {
-      
+        double powers[] = new double[2];
+        powers[0] = Controllers.getOperatorController().getRawAxis(Controllers.PS4_Controller.Axis.RIGHT_STICK_X);
+        powers[1] = Controllers.getOperatorController().getRawAxis(Controllers.PS4_Controller.Axis.RIGHT_STICK_Y);
+
+        wrist.setSupinationPower(powers[0]);
+        wrist.setFlexionPower(powers[1]);
     }
 }

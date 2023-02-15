@@ -36,23 +36,25 @@ public class WristSubsystem extends SubsystemBase{
     }
 
     public void setSupinationPower(double power){
-        if (power > 0.0 && getSupinationPosition() < Constants.WristConstants.LEFT_LIMIT) {
-            supinationMotor.set(ControlMode.PercentOutput, 0.0);
-        } else if (power > 0.0 && getSupinationPosition() > Constants.WristConstants.RIGHT_LIMIT) {
-            supinationMotor.set(ControlMode.PercentOutput, 0.0);
-        } else {
-            supinationMotor.set(ControlMode.PercentOutput, power);
-        }
+        // if (power > 0.0 && getSupinationPosition() < Constants.WristConstants.LEFT_LIMIT) {
+        //     supinationMotor.set(ControlMode.PercentOutput, 0.0);
+        // } else if (power > 0.0 && getSupinationPosition() > Constants.WristConstants.RIGHT_LIMIT) {
+        //     supinationMotor.set(ControlMode.PercentOutput, 0.0);
+        // } else {
+        //     supinationMotor.set(ControlMode.PercentOutput, power);
+        // }
+        supinationMotor.set(ControlMode.PercentOutput, power);
     }
 
     public void setFlexionPower(double power){
-        if (power > 0.0 && getFlexionPosition() < Constants.WristConstants.LOWER_LIMIT) {
-            flexionMotor.set(ControlMode.PercentOutput, 0.0);
-        } else if (power > 0.0 && getFlexionPosition() > Constants.WristConstants.UPPER_LIMIT) {
-            flexionMotor.set(ControlMode.PercentOutput, 0.0);
-        } else {
-            flexionMotor.set(ControlMode.PercentOutput, power);
-        }
+        // if (power > 0.0 && getFlexionPosition() < Constants.WristConstants.LOWER_LIMIT) {
+        //     flexionMotor.set(ControlMode.PercentOutput, 0.0);
+        // } else if (power > 0.0 && getFlexionPosition() > Constants.WristConstants.UPPER_LIMIT) {
+        //     flexionMotor.set(ControlMode.PercentOutput, 0.0);
+        // } else {
+        //     flexionMotor.set(ControlMode.PercentOutput, power);
+        // }
+        flexionMotor.set(ControlMode.PercentOutput, power);
     }
 
     public double getSupinationPosition(){
