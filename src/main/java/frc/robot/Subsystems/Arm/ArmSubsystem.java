@@ -12,7 +12,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.Constants;
 import frc.robot.constants.RobotMap;
@@ -104,6 +104,17 @@ public class ArmSubsystem extends SubsystemBase {
     return armStage1LeftMotor.getSelectedSensorPosition();
   }
 
+  public void displayShoulderPosition(){
+    SmartDashboard.putString("Shoulder", getShoulderPosition() + "");
+  }
+  public void displayElbowPosition(){
+    SmartDashboard.putString("Elbow", getElbowPosition() + "");
+  }
+
+  public void displayArmPositions(){
+    displayShoulderPosition();
+    displayElbowPosition();
+  }
 
   @Override
   public void periodic() {

@@ -5,6 +5,8 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.Constants;
 import frc.robot.constants.RobotMap;
@@ -63,6 +65,19 @@ public class WristSubsystem extends SubsystemBase{
 
     public double getFlexionPosition(){
         return flexionMotor.getSelectedSensorPosition();
+    }
+
+    public void displaySupinationPosition(){
+        SmartDashboard.putString("Supination", getSupinationPosition() + "");
+      }
+
+    public void displayFlexionPosition(){
+        SmartDashboard.putString("Flexion", getFlexionPosition() + "");
+    }
+
+    public void displayWristPositions(){
+        displayFlexionPosition();
+        displaySupinationPosition();
     }
 
     @Override
