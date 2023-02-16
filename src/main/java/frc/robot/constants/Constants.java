@@ -11,8 +11,8 @@ public class Constants {
       public static final double SHOULDER_HIGH_LIMIT = 45000;
       public static final double SHOULDER_LOW_LIMIT = 45000;
 
-      public static final double ELBOW_HIGH_LIMIT = 45000.0;//-7846.0;
-      public static final double ELBOW_LOW_LIMIT = 1000.0;//-53587.0;
+      public static final double ELBOW_HIGH_LIMIT = 20000.0;//-7846.0;
+      public static final double ELBOW_LOW_LIMIT = -10000.0;//-53587.0;
 
       public static final double SHOULDER_HOLD_POWER = -0.13;
       public static final double ELBOW_HOLD_POWER = -0.13;

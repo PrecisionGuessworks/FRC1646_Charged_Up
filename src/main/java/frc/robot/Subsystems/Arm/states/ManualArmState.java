@@ -19,36 +19,30 @@ public class ManualArmState extends CommandBase {
 
   @Override
   public void execute() {
-    double power = -0.3 * Controllers.getOperatorController().getRawAxis(Controllers.PS4_Controller.Axis.LEFT_STICK_Y);
-    //The motor initially stalls when rising, so I'm giving it extra power to raise up at the point in time
-    if (power > 0.0 && arm.getShoulderPosition() < 10000){
-      power *= 3;
-    }
-    arm.setShoulderPower(power);
-
 
     // Shoulder + Elbow Values
     double shoulderPower = -0.5 * Controllers.getOperatorController().getRawAxis(Controllers.PS4_Controller.Axis.LEFT_STICK_Y);
     double elbowPower = -0.5 * Controllers.getOperatorController().getRawAxis(Controllers.PS4_Controller.Axis.LEFT_STICK_X);
 
     // Shoulder Control
-    if (shoulderPower > 0.0 && arm.getShoulderPosition() > Constants.ArmConstants.SHOULDER_HIGH_LIMIT) { // Arm too high
-      arm.setShoulderPower(0);
-    } else if (shoulderPower < 0.0 && arm.getShoulderPosition() < Constants.ArmConstants.SHOULDER_LOW_LIMIT) { // Arm too low
-      arm.setShoulderPower(0);
-    } else {
-      arm.setShoulderPower(shoulderPower);
-    }
+    // if (shoulderPower > 0.0 && arm.getShoulderPosition() > Constants.ArmConstants.SHOULDER_HIGH_LIMIT) { // Arm too high
+    //   arm.setShoulderPower(0);
+    // } else if (shoulderPower < 0.0 && arm.getShoulderPosition() < Constants.ArmConstants.SHOULDER_LOW_LIMIT) { // Arm too low
+    //   arm.setShoulderPower(0);
+    // } else {
+    //   arm.setShoulderPower(shoulderPower);
+    // }
+    arm.setShoulderPower(shoulderPower);
 
     // Elbow Control
-    if (elbowPower > 0.0 && arm.getElbowPosition() > Constants.ArmConstants.ELBOW_HIGH_LIMIT) {
-      arm.setElbowPower(0);
-    } else if (elbowPower < 0.0 && arm.getElbowPosition() < Constants.ArmConstants.ELBOW_LOW_LIMIT) {
-      arm.setElbowPower(0);
-    } else {
-      arm.setElbowPower(elbowPower);
-    }
-
+    // if (elbowPower > 0.0 && arm.getElbowPosition() > Constants.ArmConstants.ELBOW_HIGH_LIMIT) {
+    //   arm.setElbowPower(0);
+    // } else if (elbowPower < 0.0 && arm.getElbowPosition() < Constants.ArmConstants.ELBOW_LOW_LIMIT) {
+    //   arm.setElbowPower(0);
+    // } else {
+    //   arm.setElbowPower(elbowPower);
+    // }
+    arm.setElbowPower(elbowPower);
     // NOTE: These are worst case value limits. Given the arm geometry and many ways it needs to fold, this will not stop crashes. That'll need math.
 
   }
