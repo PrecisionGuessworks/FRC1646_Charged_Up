@@ -4,8 +4,6 @@
 
 package frc.robot.Subsystems.Drivetrain;
 
-import javax.swing.plaf.synth.SynthCheckBoxMenuItemUI;
-
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
@@ -15,6 +13,7 @@ import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.constants.Constants;
 import frc.robot.constants.RobotMap;
 import frc.robot.lib.PIDConfig;
 import frc.robot.lib.TalonFXFactory;
@@ -44,7 +43,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     topLeftMotor.setNeutralMode(NeutralMode.Brake);
     topRightMotor.setNeutralMode(NeutralMode.Brake);
 
-    filter = new SlewRateLimiter(0.5);
+    filter = new SlewRateLimiter(Constants.DriveConstants.SLEW_RATE_LIMIT);
   }
 
   public static synchronized DrivetrainSubsystem getInstance(){
@@ -65,7 +64,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
       quickTurn = false;
     }
 
-    throttle = filter.calculate(throttle);
+    throttle = filter.calculate(throttle); // TODO: Figure out if this should actually go here or not
     
     //Note: Even though the variable is called wheel speed, this is actually for wheel powers
     WheelSpeeds wheelSpeed = DifferentialDrive.curvatureDriveIK(throttle, rotation, quickTurn);
