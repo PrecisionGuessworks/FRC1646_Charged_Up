@@ -16,6 +16,8 @@ import frc.robot.Subsystems.Arm.ArmSubsystem;
 import frc.robot.Subsystems.Arm.states.ManualArmState;
 import frc.robot.Subsystems.Drivetrain.DrivetrainSubsystem;
 import frc.robot.Subsystems.Drivetrain.states.OpenLoopState;
+import frc.robot.Subsystems.Intake.IntakeSubsystem;
+import frc.robot.Subsystems.Intake.states.ManualIntakeState;
 import frc.robot.Subsystems.Wrist.WristSubsystem;
 import frc.robot.Subsystems.Wrist.states.ManualWristState;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -35,6 +37,7 @@ public class RobotContainer {
   DrivetrainSubsystem drive;
   ArmSubsystem arm;
   WristSubsystem wrist;
+  IntakeSubsystem intake;
   PowerDistribution powerDistrubutionBoard;
 
 
@@ -49,6 +52,7 @@ public class RobotContainer {
     drive = DrivetrainSubsystem.getInstance();
     arm = ArmSubsystem.getInstance();
     wrist = WristSubsystem.getInstance();
+    intake = IntakeSubsystem.getInstance();
   }
 
   public void initilizePowerDistrubutionBoard(){
@@ -57,9 +61,10 @@ public class RobotContainer {
   }
 
   public void setAllDefaultCommands(){
-    setDefaultCommand(drive, new OpenLoopState(Controllers.getDriverController().getRawAxis(Controllers.PS4_Controller.Axis.LEFT_STICK_Y), Controllers.getDriverController().getRawAxis(Controllers.PS4_Controller.Axis.RIGHT_STICK_X)));
+    setDefaultCommand(drive, new OpenLoopState());
     setDefaultCommand(arm, new ManualArmState());
     setDefaultCommand(wrist, new ManualWristState());
+    setDefaultCommand(intake, new ManualIntakeState());
   }
 
   public void setDefaultCommand(Subsystem subsystem, Command defaultCommand){

@@ -6,6 +6,7 @@ package frc.robot.Subsystems.Drivetrain;
 
 import javax.swing.plaf.synth.SynthCheckBoxMenuItemUI;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -32,6 +33,13 @@ public class DrivetrainSubsystem extends SubsystemBase {
     frontRightMotor = TalonFXFactory.makeTalonFX(RobotMap.DRIVETRAIN_RIGHT_FRONT_ID, TalonFXInvertType.CounterClockwise, new PIDConfig(0.0, 0.0, 0.0, 0.0));
     topRightMotor = TalonFXFactory.makeFollowerTalonFX(RobotMap.DRIVETRAIN_RIGHT_TOP_ID, frontRightMotor);
     backRightMotor = TalonFXFactory.makeFollowerTalonFX(RobotMap.DRIVETRAIN_RIGHT_BACK_ID, frontRightMotor);
+
+    frontLeftMotor.setNeutralMode(NeutralMode.Brake);
+    frontRightMotor.setNeutralMode(NeutralMode.Brake);
+    backLeftMotor.setNeutralMode(NeutralMode.Brake);
+    backRightMotor.setNeutralMode(NeutralMode.Brake);
+    topLeftMotor.setNeutralMode(NeutralMode.Brake);
+    topRightMotor.setNeutralMode(NeutralMode.Brake);
   }
 
   public static synchronized DrivetrainSubsystem getInstance(){

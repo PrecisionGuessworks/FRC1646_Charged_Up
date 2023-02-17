@@ -14,14 +14,17 @@ public class OpenLoopState extends CommandBase {
   DrivetrainSubsystem drive = DrivetrainSubsystem.getInstance();
   double throttle, rotation;
 
-  public OpenLoopState(double throttle, double rotation) {
-    this.throttle = throttle;
-    this.rotation = rotation;
+  public OpenLoopState() {
+    // this.throttle = throttle;
+    // this.rotation = rotation;
     addRequirements(drive);
   }
 
   @Override
   public void execute() {
+    throttle = Controllers.getDriverController().getRawAxis(Controllers.PS4_Controller.Axis.LEFT_STICK_Y);
+    rotation = Controllers.getDriverController().getRawAxis(Controllers.PS4_Controller.Axis.RIGHT_STICK_X);
+
     drive.curvatureDrive(throttle * DriveConstants.THROTTLE_SCALER, rotation * DriveConstants.ROTATION_SCALE);
   }
   

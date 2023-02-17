@@ -45,6 +45,8 @@ public class ManualArmState extends CommandBase {
     arm.setElbowPower(elbowPower);
     // NOTE: These are worst case value limits. Given the arm geometry and many ways it needs to fold, this will not stop crashes. That'll need math.
 
+    arm.displayArmPositions();
+
   }
 
 }
