@@ -86,18 +86,26 @@ public class ArmSubsystem extends SubsystemBase {
 
 
   public void setElbowPower(double power){
-    // if (power > 0.0 && getElbowPosition() > Constants.ArmConstants.ELBOW_HIGH_LIMIT){
-    //   armStage1LeftMotor.set(ControlMode.PercentOutput, 0.0);
-    //   armStage1RightMotor.set(ControlMode.PercentOutput, 0.0);
-    // }else if(power < 0.0 && getElbowPosition() < Constants.ArmConstants.ELBOW_LOW_LIMIT){
-    //   armStage1LeftMotor.set(ControlMode.PercentOutput, ArmConstants.ELBOW_HOLD_POWER);
-    //   armStage1RightMotor.set(ControlMode.PercentOutput, ArmConstants.ELBOW_HOLD_POWER);
-    // }else{
-    //   armStage1LeftMotor.set(ControlMode.PercentOutput, power);
-    //   armStage1RightMotor.set(ControlMode.PercentOutput, power);
-    // } 
     armStage1LeftMotor.set(ControlMode.PercentOutput, power);
     armStage1RightMotor.set(ControlMode.PercentOutput, power);
+  }
+
+  private boolean isElbowTooHigh(double power){
+    return power > 0.0 && getElbowPosition() > Constants.ArmConstants.ELBOW_HIGH_LIMIT;
+  }
+  private boolean isElbowTooLow(double power){
+    return power < 0.0 && getElbowPosition() < Constants.ArmConstants.ELBOW_LOW_LIMIT;
+  }
+
+  public void setElbowPowerWithSafeties(double power){
+    if (isElbowTooHigh(power)) {
+      setElbowPower(0);
+    } else if (isElbowTooLow(power)) {
+      setElbowPower(Constants.ArmConstants.ELBOW_HOLD_POWER);
+      // This keeps the arm from sinking
+    } else {
+      setElbowPower(power);
+    }
   }
 
   public void setElbowPosition(double position) {
