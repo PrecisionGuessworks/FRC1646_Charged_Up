@@ -38,31 +38,44 @@ public class WristSubsystem extends SubsystemBase{
     }
 
     public void setSupinationPower(double power){
-        // if (power > 0.0 && getSupinationPosition() < Constants.WristConstants.LEFT_LIMIT) {
-        //     supinationMotor.set(ControlMode.PercentOutput, 0.0);
-        // } else if (power > 0.0 && getSupinationPosition() > Constants.WristConstants.RIGHT_LIMIT) {
-        //     supinationMotor.set(ControlMode.PercentOutput, 0.0);
-        // } else {
-        //     supinationMotor.set(ControlMode.PercentOutput, power);
-        // }
         supinationMotor.set(ControlMode.PercentOutput, power);
     }
 
-    public boolean isWristTooFarLeft() {
-        return getSupinationPosition() < Constants.WristConstants.LEFT_SUPINATION_LIMIT;
+    private boolean isWristTooFarLeft(double power) {
+        return power < 0.0 && getSupinationPosition() < Constants.WristConstants.LEFT_SUPINATION_LIMIT;
+    }
+    private boolean isWristTooFarRight(double power) {
+        return  power > 0.0 && getSupinationPosition() > Constants.WristConstants.RIGHT_SUPINATION_LIMIT;
     }
 
-    
+    public void setSupinationPowerWithSafeties(double power){
+        if (isWristTooFarLeft(power)) {
+            setSupinationPower(0);
+        } else if (isWristTooFarRight(power)) {
+            setSupinationPower(0);
+        } else {
+            setSupinationPower(power);
+        }
+    }
 
     public void setFlexionPower(double power){
-        // if (power > 0.0 && getFlexionPosition() < Constants.WristConstants.LOWER_LIMIT) {
-        //     flexionMotor.set(ControlMode.PercentOutput, 0.0);
-        // } else if (power > 0.0 && getFlexionPosition() > Constants.WristConstants.UPPER_LIMIT) {
-        //     flexionMotor.set(ControlMode.PercentOutput, 0.0);
-        // } else {
-        //     flexionMotor.set(ControlMode.PercentOutput, power);
-        // }
         flexionMotor.set(ControlMode.PercentOutput, power);
+    }
+
+    private boolean isWristTooHigh(double power){
+        return power > 0.0 && getFlexionPosition() > Constants.WristConstants.UPPER_FLEXION_LIMIT;
+    }
+    private boolean isWristTooLow(double power){
+        return power < 0.0 && getFlexionPosition() < Constants.WristConstants.LOWER_FLEXION_LIMIT;
+    }
+    public void setFlexionPowerWithSafeties(double power){
+        if (isWristTooHigh(power)) {
+            setFlexionPower(0);
+        } else if (isWristTooLow(power)) {
+            setFlexionPower(0);
+        } else {
+            setFlexionPower(power);
+        }
     }
 
     public double getSupinationPosition(){
