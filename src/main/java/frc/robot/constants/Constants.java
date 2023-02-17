@@ -2,8 +2,8 @@ package frc.robot.constants;
 
 public class Constants {
    public static final class DriveConstants{
-    public static final double THROTTLE_SCALER = 0.8;
-    public static final double ROTATION_SCALE = 0.4;
+    public static final double THROTTLE_SCALER = 0.65;
+    public static final double ROTATION_SCALE = 0.3;
    } 
 
    public static final class ArmConstants{
@@ -28,6 +28,9 @@ public class Constants {
       public static final double RIGHT_SUPINATION_LIMIT = 20000;
       public static final double UPPER_FLEXION_LIMIT = 20000;
       public static final double LOWER_FLEXION_LIMIT = 1000;
+
+      public static final double SUPINATION_SCALAR = 0.25;
+      public static final double FLEXION_SCALAR = 0.25;
 
       public static enum WristFlexionPosition{
          STRAIGHT_OUT, FEEDER
