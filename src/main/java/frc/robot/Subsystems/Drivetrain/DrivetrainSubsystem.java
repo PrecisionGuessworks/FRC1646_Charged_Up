@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,6 +23,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
   
   private TalonFX frontRightMotor, topRightMotor, backRightMotor;
   private TalonFX frontLeftMotor, topLeftMotor, backLeftMotor; 
+
+  private SlewRateLimiter filter;
 
   private static DrivetrainSubsystem instance;
 
@@ -40,6 +43,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     backRightMotor.setNeutralMode(NeutralMode.Brake);
     topLeftMotor.setNeutralMode(NeutralMode.Brake);
     topRightMotor.setNeutralMode(NeutralMode.Brake);
+
+    filter = new SlewRateLimiter(0.5);
   }
 
   public static synchronized DrivetrainSubsystem getInstance(){
@@ -59,8 +64,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
     if (throttle > 0.15){
       quickTurn = false;
     }
+
+    throttle = filter.calculate(throttle);
+    
     //Note: Even though the variable is called wheel speed, this is actually for wheel powers
     WheelSpeeds wheelSpeed = DifferentialDrive.curvatureDriveIK(throttle, rotation, quickTurn);
+
     setPower(wheelSpeed.left, wheelSpeed.right);
   }
 
