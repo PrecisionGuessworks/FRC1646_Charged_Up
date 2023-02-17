@@ -2,6 +2,7 @@ package frc.robot.Subsystems.Wrist.states;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.Wrist.WristSubsystem;
+import frc.robot.constants.Constants;
 import frc.robot.lib.Controllers;
 
 public class ManualWristState extends CommandBase{
@@ -17,7 +18,9 @@ public class ManualWristState extends CommandBase{
         powers[0] = Controllers.getOperatorController().getRawAxis(Controllers.PS4_Controller.Axis.RIGHT_STICK_X);
         powers[1] = Controllers.getOperatorController().getRawAxis(Controllers.PS4_Controller.Axis.RIGHT_STICK_Y);
 
-        wrist.setSupinationPower(powers[0]);
-        wrist.setFlexionPower(powers[1]);
+        wrist.setSupinationPower(powers[0] * Constants.WristConstants.SUPINATION_SCALAR);
+        wrist.setFlexionPower(powers[1] * Constants.WristConstants.FLEXION_SCALAR);
+
+        wrist.displayWristPositions();
     }
 }
