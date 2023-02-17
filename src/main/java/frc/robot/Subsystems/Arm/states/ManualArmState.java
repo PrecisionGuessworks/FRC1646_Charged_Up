@@ -23,8 +23,8 @@ public class ManualArmState extends CommandBase {
     double elbowPower = Controllers.getOperatorController().getRawAxis(Controllers.PS4_Controller.Axis.LEFT_STICK_X);
 
     // Shoulder + Elbow Values
-    shoulderPower = Constants.ArmConstants.SHOULDER_ROTATION_SPEED * shoulderPower;
-    elbowPower = Constants.ArmConstants.ELBOW_ROTATION_SPEED * elbowPower;
+    shoulderPower = Constants.ArmConstants.SHOULDER_ROTATION_SCALAR * shoulderPower;
+    elbowPower = Constants.ArmConstants.ELBOW_ROTATION_SCALAR * elbowPower;
 
     // Shoulder Control
     arm.setShoulderPower(shoulderPower);

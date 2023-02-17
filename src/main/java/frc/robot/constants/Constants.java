@@ -12,12 +12,12 @@ public class Constants {
       // Stage 0-1
       public static final double SHOULDER_HIGH_LIMIT = 45000;
       public static final double SHOULDER_LOW_LIMIT = 45000;
-      public static final double SHOULDER_ROTATION_SPEED = -0.5;
+      public static final double SHOULDER_ROTATION_SCALAR = -0.5;
 
       // Stage 1-2
       public static final double ELBOW_HIGH_LIMIT = 20000.0;
       public static final double ELBOW_LOW_LIMIT = -10000.0;
-      public static final double ELBOW_ROTATION_SPEED = -0.5;
+      public static final double ELBOW_ROTATION_SCALAR = -0.5;
 
       public static final double SHOULDER_HOLD_POWER = -0.13;
       public static final double ELBOW_HOLD_POWER = -0.13;
