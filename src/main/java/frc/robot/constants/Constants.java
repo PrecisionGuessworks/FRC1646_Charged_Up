@@ -22,6 +22,9 @@ public class Constants {
       public static final double SHOULDER_HOLD_POWER = -0.13;
       public static final double ELBOW_HOLD_POWER = -0.13;
 
+      public static final double SHOULDER_SLEW_RATE_LIMIT = 0.5;
+      public static final double ELBOW_SLEW_RATE_LIMIT = 0.5;
+
       public static enum ArmPosition{
           STOWED, HIGH_NODE, MED_NODE, MED_CUBE, HIGH_CUBE, GROUND_SCORE, FEEDER_STATION
           // WHAT ARE THESE SCORING LOCATIONS CALLED???
