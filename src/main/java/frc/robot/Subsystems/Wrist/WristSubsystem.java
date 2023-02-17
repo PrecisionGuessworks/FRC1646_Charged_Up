@@ -48,6 +48,12 @@ public class WristSubsystem extends SubsystemBase{
         supinationMotor.set(ControlMode.PercentOutput, power);
     }
 
+    public boolean isWristTooFarLeft() {
+        return getSupinationPosition() < Constants.WristConstants.LEFT_SUPINATION_LIMIT;
+    }
+
+    
+
     public void setFlexionPower(double power){
         // if (power > 0.0 && getFlexionPosition() < Constants.WristConstants.LOWER_LIMIT) {
         //     flexionMotor.set(ControlMode.PercentOutput, 0.0);
