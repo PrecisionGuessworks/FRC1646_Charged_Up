@@ -72,7 +72,7 @@ public class ArmSubsystem extends SubsystemBase {
     // } 
 
     armStage0LeftMotor.set(ControlMode.PercentOutput, power);
-      armStage0RightMotor.set(ControlMode.PercentOutput, power);
+    armStage0RightMotor.set(ControlMode.PercentOutput, power);
   }
 
   public void setShoulderPosition(double position){
@@ -86,16 +86,18 @@ public class ArmSubsystem extends SubsystemBase {
 
 
   public void setElbowPower(double power){
-    if (power > 0.0 && getElbowPosition() > Constants.ArmConstants.ELBOW_HIGH_LIMIT){
-      armStage1LeftMotor.set(ControlMode.PercentOutput, 0.0);
-      armStage1RightMotor.set(ControlMode.PercentOutput, 0.0);
-    }else if(power < 0.0 && getElbowPosition() < Constants.ArmConstants.ELBOW_LOW_LIMIT){
-      armStage1LeftMotor.set(ControlMode.PercentOutput, ArmConstants.ELBOW_HOLD_POWER);
-      armStage1RightMotor.set(ControlMode.PercentOutput, ArmConstants.ELBOW_HOLD_POWER);
-    }else{
-      armStage1LeftMotor.set(ControlMode.PercentOutput, power);
-      armStage1RightMotor.set(ControlMode.PercentOutput, power);
-    } 
+    // if (power > 0.0 && getElbowPosition() > Constants.ArmConstants.ELBOW_HIGH_LIMIT){
+    //   armStage1LeftMotor.set(ControlMode.PercentOutput, 0.0);
+    //   armStage1RightMotor.set(ControlMode.PercentOutput, 0.0);
+    // }else if(power < 0.0 && getElbowPosition() < Constants.ArmConstants.ELBOW_LOW_LIMIT){
+    //   armStage1LeftMotor.set(ControlMode.PercentOutput, ArmConstants.ELBOW_HOLD_POWER);
+    //   armStage1RightMotor.set(ControlMode.PercentOutput, ArmConstants.ELBOW_HOLD_POWER);
+    // }else{
+    //   armStage1LeftMotor.set(ControlMode.PercentOutput, power);
+    //   armStage1RightMotor.set(ControlMode.PercentOutput, power);
+    // } 
+    armStage1LeftMotor.set(ControlMode.PercentOutput, power);
+    armStage1RightMotor.set(ControlMode.PercentOutput, power);
   }
 
   public void setElbowPosition(double position) {
