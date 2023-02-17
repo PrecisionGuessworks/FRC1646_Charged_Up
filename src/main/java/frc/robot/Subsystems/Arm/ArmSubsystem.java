@@ -60,19 +60,26 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void setShoulderPower(double power){
-    // if (power > 0.0 && getShoulderPosition() > Constants.ArmConstants.SHOULDER_HIGH_LIMIT){
-    //   armStage0LeftMotor.set(ControlMode.PercentOutput, 0.0);
-    //   armStage0RightMotor.set(ControlMode.PercentOutput, 0.0);
-    // }else if(power < 0.0 && getShoulderPosition() < Constants.ArmConstants.SHOULDER_LOW_LIMIT){
-    //   armStage0RightMotor.set(ControlMode.PercentOutput, ArmConstants.SHOULDER_HOLD_POWER);
-    //   armStage0LeftMotor.set(ControlMode.PercentOutput, ArmConstants.SHOULDER_HOLD_POWER);
-    // }else{
-    //   armStage0LeftMotor.set(ControlMode.PercentOutput, power);
-    //   armStage0RightMotor.set(ControlMode.PercentOutput, power);
-    // } 
-
     armStage0LeftMotor.set(ControlMode.PercentOutput, power);
     armStage0RightMotor.set(ControlMode.PercentOutput, power);
+  }
+
+  private boolean isShoulderTooHigh(double power){
+    return power > 0.0 && getShoulderPosition() > Constants.ArmConstants.SHOULDER_HIGH_LIMIT;
+  }
+  private boolean isShoulderTooLow(double power){
+    return power < 0.0 && getShoulderPosition() < Constants.ArmConstants.SHOULDER_LOW_LIMIT;
+  }
+
+  public void setShoulderPowerWithSafeties(double power){
+    if (isShoulderTooHigh(power)) {
+      setShoulderPower(0);
+    } else if (isShoulderTooLow(power)) {
+      setShoulderPower(Constants.ArmConstants.SHOULDER_HOLD_POWER);
+      // This keeps the arm from sinking
+    } else {
+      setShoulderPower(power);
+    }
   }
 
   public void setShoulderPosition(double position){
