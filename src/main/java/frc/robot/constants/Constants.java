@@ -2,16 +2,17 @@ package frc.robot.constants;
 
 public class Constants {
    public static final class DriveConstants{
-    public static final double THROTTLE_SCALER = 0.65;
+    public static final double THROTTLE_SCALER = 0.8;
     public static final double ROTATION_SCALE = 0.3;
 
-    public static final double SLEW_RATE_LIMIT = 0.5;
+    public static final double POSITIVE_SLEW_RATE_LIMIT = 0.95;
+    public static final double NEGATIVE_SLEW_RATE_LIMIT = -1.75;
    } 
 
    public static final class ArmConstants{
       // Stage 0-1
-      public static final double SHOULDER_HIGH_LIMIT = 45000;
-      public static final double SHOULDER_LOW_LIMIT = 45000;
+      public static final double SHOULDER_HIGH_LIMIT = 36;
+      public static final double SHOULDER_LOW_LIMIT = 0;
       public static final double SHOULDER_ROTATION_SCALAR = -0.5;
 
       // Stage 1-2
