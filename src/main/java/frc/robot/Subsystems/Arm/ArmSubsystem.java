@@ -13,7 +13,9 @@ import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.simulation.AnalogInputSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.Constants;
@@ -28,6 +30,8 @@ public class ArmSubsystem extends SubsystemBase {
   private AnalogPotentiometer stage0Pot;
   private SlewRateLimiter stage0Filter, stage1Filter;
   
+  
+
   private ArmSubsystem() {
     //Stage 0 to 1
     armStage0LeftMotor = TalonFXFactory.makeTalonFX(RobotMap.ARM_STAGE0_LEFT_ID); 
@@ -55,7 +59,7 @@ public class ArmSubsystem extends SubsystemBase {
     armStage1RightMotor.setNeutralMode(NeutralMode.Brake);
 
 
-    stage0Pot = new AnalogPotentiometer(0, 180, 30);
+    stage0Pot = new AnalogPotentiometer(0,100, -15);
 
     stage0Filter = new SlewRateLimiter(Constants.ArmConstants.SHOULDER_SLEW_RATE_LIMIT);
     stage1Filter = new SlewRateLimiter(Constants.ArmConstants.ELBOW_SLEW_RATE_LIMIT);
@@ -84,8 +88,7 @@ public class ArmSubsystem extends SubsystemBase {
     if (isShoulderTooHigh(power)) {
       setShoulderPower(0);
     } else if (isShoulderTooLow(power)) {
-      setShoulderPower(Constants.ArmConstants.SHOULDER_HOLD_POWER);
-      // This keeps the arm from sinking
+      setShoulderPower(0);
     } else {
       setShoulderPower(power);
     }
@@ -97,7 +100,8 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public double getShoulderPosition(){
-    return armStage0LeftMotor.getSelectedSensorPosition();
+    //return armStage0LeftMotor.getSelectedSensorPosition();
+    return getStage0PotValue();
   }
 
 
@@ -145,8 +149,16 @@ public class ArmSubsystem extends SubsystemBase {
     displayElbowPosition();
   }
 
+  public void displayShoulderPot(){
+    SmartDashboard.putString("Soulder Pot", getStage0PotValue() + "");
+  }
+
   public double getStage0PotValue(){
     return stage0Pot.get();
+  }
+
+  public void displayRequestedPower(double power){
+    SmartDashboard.putString("Shoulder Power: ", power + "");
   }
 
   @Override

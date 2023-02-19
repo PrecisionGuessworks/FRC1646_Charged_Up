@@ -27,13 +27,15 @@ public class ManualArmState extends CommandBase {
     elbowPower = Constants.ArmConstants.ELBOW_ROTATION_SCALAR * elbowPower;
 
     // Shoulder Control
-    arm.setShoulderPower(shoulderPower);
+    arm.setShoulderPowerWithSafeties(shoulderPower);
 
     // Elbow Control
     arm.setElbowPower(elbowPower);
     
     // Send data to SmartDashboard for viewing
     arm.displayArmPositions();
+    arm.displayShoulderPot();
+    arm.displayRequestedPower(shoulderPower);
   }
 
 }
