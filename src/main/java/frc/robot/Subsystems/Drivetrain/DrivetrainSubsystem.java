@@ -23,7 +23,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
   private TalonFX frontRightMotor, topRightMotor, backRightMotor;
   private TalonFX frontLeftMotor, topLeftMotor, backLeftMotor; 
 
-  private SlewRateLimiter filter;
+  private SlewRateLimiter throttleFilter, rotationFilter;
 
   private static DrivetrainSubsystem instance;
 
@@ -43,7 +43,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     topLeftMotor.setNeutralMode(NeutralMode.Brake);
     topRightMotor.setNeutralMode(NeutralMode.Brake);
 
-    filter = new SlewRateLimiter(Constants.DriveConstants.SLEW_RATE_LIMIT);
+    throttleFilter = new SlewRateLimiter(Constants.DriveConstants.POSITIVE_SLEW_RATE_LIMIT, Constants.DriveConstants.NEGATIVE_SLEW_RATE_LIMIT, 0);
+    rotationFilter = new SlewRateLimiter(0.95);
   }
 
   public static synchronized DrivetrainSubsystem getInstance(){
@@ -64,7 +65,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
       quickTurn = false;
     }
 
-    throttle = filter.calculate(throttle); // TODO: Figure out if this should actually go here or not
+    throttle = throttleFilter.calculate(throttle); // TODO: Figure out if this should actually go here or not
+    rotation = rotationFilter.calculate(rotation);
     
     //Note: Even though the variable is called wheel speed, this is actually for wheel powers
     WheelSpeeds wheelSpeed = DifferentialDrive.curvatureDriveIK(throttle, rotation, quickTurn);
