@@ -26,43 +26,43 @@ import frc.robot.lib.TalonFXFactory;
 public class ArmSubsystem extends SubsystemBase {
 
   private static ArmSubsystem instance;
-  private TalonFX armStage0LeftMotor, armStage0RightMotor, armStage1LeftMotor, armStage1RightMotor;
-  private AnalogPotentiometer stage0Pot;
-  private SlewRateLimiter stage0Filter, stage1Filter;
+  private TalonFX shoulderLeftMotor, shoulderRightMotor, elbowLeftMotor, elbowRightMotor;
+  private AnalogPotentiometer shoulderPot;
+  private SlewRateLimiter shoulderFilter, elbowFilter;
   
   
 
   private ArmSubsystem() {
     //Stage 0 to 1
-    armStage0LeftMotor = TalonFXFactory.makeTalonFX(RobotMap.ARM_STAGE0_LEFT_ID); 
-    armStage0RightMotor = TalonFXFactory.makeTalonFX(RobotMap.ARM_STAGE0_RIGHT_ID); 
+    shoulderLeftMotor = TalonFXFactory.makeTalonFX(RobotMap.SHOULDER_LEFT_ID); 
+    shoulderRightMotor = TalonFXFactory.makeTalonFX(RobotMap.SHOULDER_RIGHT_ID); 
 
     // Stage 1 to 2
-    armStage1LeftMotor = TalonFXFactory.makeTalonFX(RobotMap.ARM_STAGE1_LEFT_ID); 
-    armStage1RightMotor = TalonFXFactory.makeTalonFX(RobotMap.ARM_STAGE1_RIGHT_ID);
+    elbowLeftMotor = TalonFXFactory.makeTalonFX(RobotMap.ELBOW_LEFT_ID); 
+    elbowRightMotor = TalonFXFactory.makeTalonFX(RobotMap.ELBOW_RIGHT_ID);
 
-    armStage0LeftMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
-    armStage0RightMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
+    shoulderLeftMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
+    shoulderRightMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
 
-    armStage1LeftMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
-    armStage1RightMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
+    elbowLeftMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
+    elbowRightMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
 
-    armStage0LeftMotor.setInverted(TalonFXInvertType.CounterClockwise);
-    armStage0RightMotor.setInverted(TalonFXInvertType.Clockwise);
-    armStage1LeftMotor.setInverted(TalonFXInvertType.CounterClockwise);
-    armStage1RightMotor.setInverted(TalonFXInvertType.Clockwise);
-
-
-    armStage0LeftMotor.setNeutralMode(NeutralMode.Brake);
-    armStage0RightMotor.setNeutralMode(NeutralMode.Brake);
-    armStage1LeftMotor.setNeutralMode(NeutralMode.Brake);
-    armStage1RightMotor.setNeutralMode(NeutralMode.Brake);
+    shoulderLeftMotor.setInverted(TalonFXInvertType.CounterClockwise);
+    shoulderRightMotor.setInverted(TalonFXInvertType.Clockwise);
+    elbowLeftMotor.setInverted(TalonFXInvertType.CounterClockwise);
+    elbowRightMotor.setInverted(TalonFXInvertType.Clockwise);
 
 
-    stage0Pot = new AnalogPotentiometer(0,100, -15);
+    shoulderLeftMotor.setNeutralMode(NeutralMode.Brake);
+    shoulderRightMotor.setNeutralMode(NeutralMode.Brake);
+    elbowLeftMotor.setNeutralMode(NeutralMode.Brake);
+    elbowRightMotor.setNeutralMode(NeutralMode.Brake);
 
-    stage0Filter = new SlewRateLimiter(Constants.ArmConstants.SHOULDER_SLEW_RATE_LIMIT);
-    stage1Filter = new SlewRateLimiter(Constants.ArmConstants.ELBOW_SLEW_RATE_LIMIT);
+
+    shoulderPot = new AnalogPotentiometer(0,100, -15);
+
+    shoulderFilter = new SlewRateLimiter(Constants.ArmConstants.SHOULDER_SLEW_RATE_LIMIT);
+    elbowFilter = new SlewRateLimiter(Constants.ArmConstants.ELBOW_SLEW_RATE_LIMIT);
   }
 
   public static ArmSubsystem getInstance(){
@@ -73,8 +73,8 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void setShoulderPower(double power){
-    armStage0LeftMotor.set(ControlMode.PercentOutput, power);
-    armStage0RightMotor.set(ControlMode.PercentOutput, power);
+    shoulderLeftMotor.set(ControlMode.PercentOutput, power);
+    shoulderRightMotor.set(ControlMode.PercentOutput, power);
   }
 
   private boolean isShoulderTooHigh(double power){
@@ -95,19 +95,19 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void setShoulderPosition(double position){
-    armStage0LeftMotor.set(ControlMode.Position, position);
-    armStage0RightMotor.set(ControlMode.Position, position);
+    shoulderLeftMotor.set(ControlMode.Position, position);
+    shoulderRightMotor.set(ControlMode.Position, position);
   }
 
   public double getShoulderPosition(){
     //return armStage0LeftMotor.getSelectedSensorPosition();
-    return getStage0PotValue();
+    return getShoulderPotValue();
   }
 
 
   public void setElbowPower(double power){
-    armStage1LeftMotor.set(ControlMode.PercentOutput, power);
-    armStage1RightMotor.set(ControlMode.PercentOutput, power);
+    elbowLeftMotor.set(ControlMode.PercentOutput, power);
+    elbowRightMotor.set(ControlMode.PercentOutput, power);
   }
 
   private boolean isElbowTooHigh(double power){
@@ -129,12 +129,12 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void setElbowPosition(double position) {
-    armStage1LeftMotor.set(ControlMode.Position, position);
-    armStage1RightMotor.set(ControlMode.Position, position);
+    elbowLeftMotor.set(ControlMode.Position, position);
+    elbowRightMotor.set(ControlMode.Position, position);
   }
 
   public double getElbowPosition() {
-    return armStage1LeftMotor.getSelectedSensorPosition();
+    return elbowLeftMotor.getSelectedSensorPosition();
   }
 
   public void displayShoulderPosition(){
@@ -150,11 +150,11 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void displayShoulderPot(){
-    SmartDashboard.putString("Soulder Pot", getStage0PotValue() + "");
+    SmartDashboard.putString("Soulder Pot", getShoulderPotValue() + "");
   }
 
-  public double getStage0PotValue(){
-    return stage0Pot.get();
+  public double getShoulderPotValue(){
+    return shoulderPot.get();
   }
 
   public void displayRequestedPower(double power){
