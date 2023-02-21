@@ -17,7 +17,7 @@ public class Constants {
       public static final double SHOULDER_HOLD_POWER = -0.13;
       public static final double SHOULDER_SLEW_RATE_LIMIT = 0.5;
       public static final double SHOULDER_RAISE_SPEED = 0.75;
-
+      public static final double SHOULDER_LOWER_SPEED = -0.75;
       // Elbow
       public static final double ELBOW_HIGH_LIMIT = 20000.0;
       public static final double ELBOW_LOW_LIMIT = -10000.0;
