@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -36,12 +37,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     topRightMotor = TalonFXFactory.makeFollowerTalonFX(RobotMap.DRIVETRAIN_RIGHT_TOP_ID, frontRightMotor);
     backRightMotor = TalonFXFactory.makeFollowerTalonFX(RobotMap.DRIVETRAIN_RIGHT_BACK_ID, frontRightMotor);
 
-    frontLeftMotor.setNeutralMode(NeutralMode.Brake);
-    frontRightMotor.setNeutralMode(NeutralMode.Brake);
-    backLeftMotor.setNeutralMode(NeutralMode.Brake);
-    backRightMotor.setNeutralMode(NeutralMode.Brake);
-    topLeftMotor.setNeutralMode(NeutralMode.Brake);
-    topRightMotor.setNeutralMode(NeutralMode.Brake);
+    setBrakeMode(true);
 
     throttleFilter = new SlewRateLimiter(Constants.DriveConstants.POSITIVE_SLEW_RATE_LIMIT, Constants.DriveConstants.NEGATIVE_SLEW_RATE_LIMIT, 0);
     rotationFilter = new SlewRateLimiter(0.95);
@@ -77,6 +73,17 @@ public class DrivetrainSubsystem extends SubsystemBase {
   public void setSpeed(double leftSpeed, double rightSpeed){
     frontLeftMotor.set(TalonFXControlMode.Velocity, leftSpeed);
     frontRightMotor.set(TalonFXControlMode.Velocity, rightSpeed);
+  }
+
+
+  public void setBrakeMode(boolean brake){
+    NeutralMode mode = brake ? NeutralMode.Brake : NeutralMode.Coast;
+    frontLeftMotor.setNeutralMode(mode);
+    frontRightMotor.setNeutralMode(mode);
+    backLeftMotor.setNeutralMode(mode);
+    backRightMotor.setNeutralMode(mode);
+    topLeftMotor.setNeutralMode(mode);
+    topRightMotor.setNeutralMode(mode);
   }
 
   @Override
