@@ -78,6 +78,7 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void setShoulderPower(double power){
+    // TODO: Add shoulder filter if desired
     shoulderLeftMotor.set(ControlMode.PercentOutput, power);
     shoulderRightMotor.set(ControlMode.PercentOutput, power);
   }
@@ -113,6 +114,7 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void setElbowPower(double power){
+    // TODO: Add elbow filter if desired
     elbowLeftMotor.set(ControlMode.PercentOutput, power);
     elbowRightMotor.set(ControlMode.PercentOutput, power);
   }
@@ -128,8 +130,7 @@ public class ArmSubsystem extends SubsystemBase {
     if (isElbowTooHigh(power)) {
       setElbowPower(0);
     } else if (isElbowTooLow(power)) {
-      setElbowPower(Constants.ArmConstants.ELBOW_HOLD_POWER);
-      // This keeps the arm from sinking
+      setElbowPower(0);
     } else {
       setElbowPower(power);
     }
