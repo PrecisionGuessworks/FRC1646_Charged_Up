@@ -4,6 +4,8 @@
 
 package frc.robot.Subsystems.Arm;
 
+import javax.print.attribute.standard.Media;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -12,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.math.filter.MedianFilter;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -30,6 +33,7 @@ public class ArmSubsystem extends SubsystemBase {
   private AnalogPotentiometer shoulderPot;
   private SlewRateLimiter shoulderFilter, elbowFilter;
   
+  private MedianFilter potFilter;
   
 
   private ArmSubsystem() {
@@ -63,6 +67,7 @@ public class ArmSubsystem extends SubsystemBase {
 
     shoulderFilter = new SlewRateLimiter(Constants.ArmConstants.SHOULDER_SLEW_RATE_LIMIT);
     elbowFilter = new SlewRateLimiter(Constants.ArmConstants.ELBOW_SLEW_RATE_LIMIT);
+    potFilter = new MedianFilter(5); // value is the sample size to take
   }
 
   public static ArmSubsystem getInstance(){
@@ -100,10 +105,12 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public double getShoulderPosition(){
-    //return armStage0LeftMotor.getSelectedSensorPosition();
-    return getShoulderPotValue();
+    return cleanPotValue(getShoulderPotValue());
   }
 
+  public double cleanPotValue(double rawValue){
+    return potFilter.calculate(rawValue);
+  }
 
   public void setElbowPower(double power){
     elbowLeftMotor.set(ControlMode.PercentOutput, power);
