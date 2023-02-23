@@ -121,13 +121,14 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void setElbowPower(double power){
-    // TODO: Add elbow filter if desired
+    power = elbowFilter.calculate(power);
     elbowLeftMotor.set(ControlMode.PercentOutput, power);
     elbowRightMotor.set(ControlMode.PercentOutput, power);
   }
 
   private boolean isElbowTooHigh(double power){
-    return power > 0.0 && getElbowPosition() > Constants.ArmConstants.ELBOW_HIGH_LIMIT;
+    return isElbowLimitSwitchTriggered() && power > 0.0;
+    //return power > 0.0 && getElbowPosition() > Constants.ArmConstants.ELBOW_HIGH_LIMIT;
   }
   private boolean isElbowTooLow(double power){
     return power < 0.0 && getElbowPosition() < Constants.ArmConstants.ELBOW_LOW_LIMIT;
@@ -137,7 +138,7 @@ public class ArmSubsystem extends SubsystemBase {
     if (isElbowTooHigh(power)) {
       setElbowPower(0);
     } else if (isElbowTooLow(power)) {
-      setElbowPower(0);
+      setElbowPower(power); // TODO: REVERT (temp change until tweaked)
     } else {
       setElbowPower(power);
     }
@@ -176,6 +177,13 @@ public class ArmSubsystem extends SubsystemBase {
     SmartDashboard.putString(s + " Power: ", power + "");
   }
 
+  public boolean isElbowLimitSwitchTriggered(){
+    return !limitSwitch.get();
+  }
+
+  public void displayLimitSwitchStatus(){
+    SmartDashboard.putString("Limit Switch", isElbowLimitSwitchTriggered() + "");
+  }
 
 
   @Override

@@ -30,13 +30,14 @@ public class ManualArmState extends CommandBase {
     arm.setShoulderPowerWithSafeties(shoulderPower);
 
     // Elbow Control
-    arm.setElbowPower(elbowPower);
+    arm.setElbowPowerWithSafeties(elbowPower);
     
     // Send data to SmartDashboard for viewing
     arm.displayArmPositions();
     arm.displayShoulderPot();
     arm.displayRequestedPower("Shoulder", shoulderPower);
     arm.displayRequestedPower("Elbow", elbowPower);
+    arm.displayLimitSwitchStatus();
   }
 
 }
