@@ -15,18 +15,12 @@ public class ManualIntakeState extends CommandBase {
 
     @Override
     public void execute() {
-        // TODO: Change these buttons
-
-        if (Controllers.getOperatorController().getRawButton(Controllers.PS4_Controller.Button.TRIANGLE)) {
+        if (Controllers.getOperatorController().getRawButton(Controllers.PS4_Controller.Button.R1_Bumper)) {
             intake.setPower(IntakeConstants.INTAKING_SPEED);
-        } else if (Controllers.getOperatorController().getRawButton(Controllers.PS4_Controller.Button.X)) {
+        } else if (Controllers.getOperatorController().getRawButton(Controllers.PS4_Controller.Button.L1_Bumper)) {
             intake.setPower(IntakeConstants.OUTTAKING_SPEED);
         } else {
             intake.setPower(0);
         }
-
-        SmartDashboard.putString("triangle state: ", Controllers.getOperatorController().getRawButton(Controllers.PS4_Controller.Button.TRIANGLE) + "");
-
-
     }
 }
