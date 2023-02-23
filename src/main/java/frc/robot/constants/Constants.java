@@ -1,9 +1,13 @@
 package frc.robot.constants;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class Constants {
    public static final class DriveConstants{
     public static final double THROTTLE_SCALER = 0.8;
     public static final double ROTATION_SCALE = 0.3;
+
+    public static final double TS = SmartDashboard.getNumber("Throttle Scalar", 0.8);
 
     public static final double POSITIVE_SLEW_RATE_LIMIT = 0.95;
     public static final double NEGATIVE_SLEW_RATE_LIMIT = -1.75;
@@ -25,6 +29,8 @@ public class Constants {
       public static final double ELBOW_HOLD_POWER = -0.13;
       public static final double ELBOW_SLEW_RATE_LIMIT = 0.5;
       public static final double ELBOW_RAISE_SPEED = 0.75;
+
+      public static final int SHOULDER_POT_OFFSET = -10;
 
       public static enum ArmPosition{
           STOWED, HIGH_NODE, MED_NODE, MED_CUBE, HIGH_CUBE, GROUND_SCORE, FEEDER_STATION
