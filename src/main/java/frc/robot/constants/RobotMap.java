@@ -20,5 +20,11 @@ public class RobotMap {
     public static final int INTAKE_LEFT_ID = 16;
     public static final int INTAKE_RIGHT_ID = 17;
     
+    // Sensors
+    public static final int SHOULDER_POT_LEFT_ID = 0;
+    public static final int ELBBOW_LIMIT_SWITCH_ID = 0;
+
+    // PWM outputs
+    public static final int BLINKIN_ID = 0;
 
 }

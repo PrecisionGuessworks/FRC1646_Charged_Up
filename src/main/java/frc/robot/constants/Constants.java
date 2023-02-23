@@ -61,5 +61,7 @@ public class Constants {
    public static final class IntakeConstants {
       public static final double INTAKING_SPEED = 0.8;
       public static final double OUTTAKING_SPEED = -0.8;
+
+      public static final int NEO550_CURRENT_LIMIT = 25;
    }
 }

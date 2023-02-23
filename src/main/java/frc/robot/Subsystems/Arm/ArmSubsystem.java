@@ -8,6 +8,7 @@ import javax.print.attribute.standard.Media;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
@@ -18,6 +19,7 @@ import edu.wpi.first.math.filter.MedianFilter;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.simulation.AnalogInputSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -34,6 +36,8 @@ public class ArmSubsystem extends SubsystemBase {
   private SlewRateLimiter shoulderFilter, elbowFilter;
   
   private MedianFilter potFilter;
+
+  private DigitalInput limitSwitch;
   
 
   private ArmSubsystem() {
@@ -63,8 +67,11 @@ public class ArmSubsystem extends SubsystemBase {
     elbowRightMotor.setNeutralMode(NeutralMode.Brake);
 
 
-    shoulderPot = new AnalogPotentiometer(0,100, -15);
+    // Extra Sensors
+    shoulderPot = new AnalogPotentiometer(RobotMap.SHOULDER_POT_LEFT_ID,100, Constants.ArmConstants.SHOULDER_POT_OFFSET);
+    limitSwitch = new DigitalInput(RobotMap.ELBBOW_LIMIT_SWITCH_ID); // 
 
+    // Value Normalizing
     shoulderFilter = new SlewRateLimiter(Constants.ArmConstants.SHOULDER_SLEW_RATE_LIMIT);
     elbowFilter = new SlewRateLimiter(Constants.ArmConstants.ELBOW_SLEW_RATE_LIMIT);
     potFilter = new MedianFilter(5); // value is the sample size to take
@@ -165,9 +172,11 @@ public class ArmSubsystem extends SubsystemBase {
     return shoulderPot.get();
   }
 
-  public void displayRequestedPower(double power){
-    SmartDashboard.putString("Shoulder Power: ", power + "");
+  public void displayRequestedPower(String s, double power){
+    SmartDashboard.putString(s + " Power: ", power + "");
   }
+
+
 
   @Override
   public void periodic() {

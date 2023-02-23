@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.constants.Constants;
 import frc.robot.constants.RobotMap;
 
 public class IntakeSubsystem extends SubsystemBase {
@@ -21,8 +22,8 @@ public class IntakeSubsystem extends SubsystemBase {
         rightIntake.setIdleMode(IdleMode.kBrake);
 
         // Current Limiting???
-        leftIntake.setSmartCurrentLimit(30);
-        rightIntake.setSmartCurrentLimit(30);
+        leftIntake.setSmartCurrentLimit(Constants.IntakeConstants.NEO550_CURRENT_LIMIT);
+        rightIntake.setSmartCurrentLimit(Constants.IntakeConstants.NEO550_CURRENT_LIMIT);
     }
 
     public static IntakeSubsystem getInstance() {
