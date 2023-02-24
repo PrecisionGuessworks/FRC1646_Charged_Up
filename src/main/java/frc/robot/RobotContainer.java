@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import frc.robot.lib.Controllers;
 import frc.robot.Subsystems.Arm.ArmSubsystem;
 import frc.robot.Subsystems.Arm.states.ManualArmState;
+import frc.robot.Subsystems.Blinkin.BlinkinState;
+import frc.robot.Subsystems.Blinkin.BlinkinSubsystem;
 import frc.robot.Subsystems.Drivetrain.DrivetrainSubsystem;
 import frc.robot.Subsystems.Drivetrain.states.OpenLoopState;
 import frc.robot.Subsystems.Intake.IntakeSubsystem;
@@ -39,6 +41,7 @@ public class RobotContainer {
   WristSubsystem wrist;
   IntakeSubsystem intake;
   PowerDistribution powerDistrubutionBoard;
+  BlinkinSubsystem blinkin;
 
 
   public RobotContainer() {
@@ -53,6 +56,7 @@ public class RobotContainer {
     arm = ArmSubsystem.getInstance();
     wrist = WristSubsystem.getInstance();
     intake = IntakeSubsystem.getInstance();
+    blinkin = BlinkinSubsystem.getInstance();
   }
 
   public void initilizePowerDistrubutionBoard(){
@@ -65,6 +69,7 @@ public class RobotContainer {
     setDefaultCommand(arm, new ManualArmState());
     setDefaultCommand(wrist, new ManualWristState());
     setDefaultCommand(intake, new ManualIntakeState());
+    setDefaultCommand(blinkin, new BlinkinState());
   }
 
   public void setDefaultCommand(Subsystem subsystem, Command defaultCommand){
