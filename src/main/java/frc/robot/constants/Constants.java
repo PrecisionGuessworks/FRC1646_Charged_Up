@@ -15,22 +15,24 @@ public class Constants {
 
    public static final class ArmConstants{
       // Shoulder
-      public static final double SHOULDER_HIGH_LIMIT = 36;
-      public static final double SHOULDER_LOW_LIMIT = 0;
+      public static final double SHOULDER_HIGH_LIMIT = 43.5;
+      public static final double SHOULDER_LOW_LIMIT = 3.5;
       public static final double SHOULDER_ROTATION_SCALAR = -0.5;
       public static final double SHOULDER_HOLD_POWER = -0.13;
       public static final double SHOULDER_SLEW_RATE_LIMIT = 0.5;
       public static final double SHOULDER_RAISE_SPEED = 0.75;
       public static final double SHOULDER_LOWER_SPEED = -0.75;
+      public static final int SHOULDER_POT_OFFSET = -25;
+
       // Elbow
       public static final double ELBOW_HIGH_LIMIT = 20000.0;
       public static final double ELBOW_LOW_LIMIT = -10000.0;
-      public static final double ELBOW_ROTATION_SCALAR = -0.5;
+      public static final double ELBOW_ROTATION_SCALAR = -0.35;
       public static final double ELBOW_HOLD_POWER = -0.13;
-      public static final double ELBOW_SLEW_RATE_LIMIT = 0.5;
+      public static final double ELBOW_SLEW_RATE_LIMIT = 0.75;
       public static final double ELBOW_RAISE_SPEED = 0.75;
 
-      public static final int SHOULDER_POT_OFFSET = -10;
+      
 
       public static enum ArmPosition{
           STOWED, HIGH_NODE, MED_NODE, MED_CUBE, HIGH_CUBE, GROUND_SCORE, FEEDER_STATION
@@ -39,8 +41,8 @@ public class Constants {
    }
 
    public static final class WristConstants{
-      public static final double LEFT_SUPINATION_LIMIT = 1000;
-      public static final double RIGHT_SUPINATION_LIMIT = 20000;
+      public static final double LEFT_SUPINATION_LIMIT = -64000;
+      public static final double RIGHT_SUPINATION_LIMIT = 64000;
       public static final double UPPER_FLEXION_LIMIT = 20000;
       public static final double LOWER_FLEXION_LIMIT = 1000;
 

@@ -16,8 +16,8 @@ public class IntakeSubsystem extends SubsystemBase {
         leftIntake = new CANSparkMax(RobotMap.INTAKE_LEFT_ID, MotorType.kBrushless);
         rightIntake = new CANSparkMax(RobotMap.INTAKE_RIGHT_ID, MotorType.kBrushless);
 
-        leftIntake.setInverted(true);
-        rightIntake.setInverted(false);
+        leftIntake.setInverted(false);
+        rightIntake.setInverted(true);
 
         leftIntake.setIdleMode(IdleMode.kBrake);
         rightIntake.setIdleMode(IdleMode.kBrake);
