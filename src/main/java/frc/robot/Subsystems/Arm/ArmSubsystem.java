@@ -86,6 +86,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void setShoulderPower(double power){
     // TODO: Add shoulder filter if desired
+    power = shoulderFilter.calculate(power);
     shoulderLeftMotor.set(ControlMode.PercentOutput, power);
     shoulderRightMotor.set(ControlMode.PercentOutput, power);
   }
