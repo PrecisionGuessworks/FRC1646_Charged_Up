@@ -14,10 +14,9 @@ public class IntakeSubsystem extends SubsystemBase {
 
     private IntakeSubsystem() {
         leftIntake = new CANSparkMax(RobotMap.INTAKE_LEFT_ID, MotorType.kBrushless);
-        rightIntake = new CANSparkMax(RobotMap.INTAKE_RIGHT_ID, MotorType.kBrushless);
+        rightIntake = new CANSparkMax(RobotMap.INTAKE_RIGHT_ID, MotorType.kBrushless);     
 
         leftIntake.setInverted(false);
-        rightIntake.setInverted(true);
 
         leftIntake.setIdleMode(IdleMode.kBrake);
         rightIntake.setIdleMode(IdleMode.kBrake);
@@ -25,6 +24,8 @@ public class IntakeSubsystem extends SubsystemBase {
         // Current Limiting???
         leftIntake.setSmartCurrentLimit(Constants.IntakeConstants.NEO550_CURRENT_LIMIT);
         rightIntake.setSmartCurrentLimit(Constants.IntakeConstants.NEO550_CURRENT_LIMIT);
+
+        rightIntake.follow(leftIntake, true);
     }
 
     public static IntakeSubsystem getInstance() {
