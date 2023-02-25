@@ -99,7 +99,7 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void setShoulderPowerWithSafeties(double power){
-    if (isShoulderTooHigh(power)) {
+    if (isShoulderTooHigh(power)) { 
       setShoulderPower(0);
     } else if (isShoulderTooLow(power)) {
       setShoulderPower(0);
