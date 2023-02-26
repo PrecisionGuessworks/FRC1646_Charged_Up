@@ -25,6 +25,6 @@ public class RobotMap {
     public static final int ELBBOW_LIMIT_SWITCH_ID = 0;
 
     // PWM outputs
-    public static final int BLINKIN_ID = 0;
+    public static final int BLINKIN_ID = 9;
 
 }
