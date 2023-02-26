@@ -36,6 +36,7 @@ public class Constants {
       public static final double ELBOW_SLEW_RATE_LIMIT = 0.75;
       public static final double ELBOW_RAISE_SPEED = 0.75;
 
+      public static final double ELBOW_TRAVEL_DELTA = 10000;
       
 
       public static enum ArmPosition{
