@@ -18,6 +18,8 @@ public class BlinkinState extends CommandBase{
             blinkin.setPurpleLED();
         } else if (Controllers.getOperatorController().getRawButton(Controllers.PS4_Controller.Button.CIRCLE)){
             blinkin.setRedLED();
+        } else if (Controllers.getDriverController().getRawButton(Controllers.PS4_Controller.Button.CIRCLE)){
+            blinkin.setColor(Colors.BLUE);
         } else {
             blinkin.setWhiteLED();
         }
