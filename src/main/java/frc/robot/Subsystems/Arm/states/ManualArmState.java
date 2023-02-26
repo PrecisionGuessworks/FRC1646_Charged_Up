@@ -38,6 +38,8 @@ public class ManualArmState extends CommandBase {
     arm.displayRequestedPower("Shoulder", shoulderPower);
     arm.displayRequestedPower("Elbow", elbowPower);
     arm.displayLimitSwitchStatus();
+
+    arm.resetFoldLimit();
   }
 
 }

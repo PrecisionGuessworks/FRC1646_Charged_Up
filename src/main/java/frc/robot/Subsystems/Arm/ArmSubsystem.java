@@ -38,6 +38,8 @@ public class ArmSubsystem extends SubsystemBase {
   private MedianFilter potFilter;
 
   private DigitalInput limitSwitch;
+
+  private double snapshotEncoder, elbowFoldLimit;
   
 
   private ArmSubsystem() {
@@ -75,6 +77,8 @@ public class ArmSubsystem extends SubsystemBase {
     shoulderFilter = new SlewRateLimiter(Constants.ArmConstants.SHOULDER_SLEW_RATE_LIMIT);
     elbowFilter = new SlewRateLimiter(Constants.ArmConstants.ELBOW_SLEW_RATE_LIMIT);
     potFilter = new MedianFilter(5); // value is the sample size to take
+
+    
   }
 
   public static ArmSubsystem getInstance(){
@@ -82,6 +86,13 @@ public class ArmSubsystem extends SubsystemBase {
       instance = new ArmSubsystem();
     }
     return instance;
+  }
+
+
+  public void resetFoldLimit(){
+    if (isElbowLimitSwitchTriggered()) {
+      elbowFoldLimit = getElbowPosition() + Constants.ArmConstants.ELBOW_TRAVEL_DELTA; // TODO: depending signed vals, might need -/+
+    }
   }
 
   public void setShoulderPower(double power){
@@ -132,14 +143,14 @@ public class ArmSubsystem extends SubsystemBase {
     //return power > 0.0 && getElbowPosition() > Constants.ArmConstants.ELBOW_HIGH_LIMIT;
   }
   private boolean isElbowTooLow(double power){
-    return power < 0.0 && getElbowPosition() < Constants.ArmConstants.ELBOW_LOW_LIMIT;
+    return power < 0.0 && getElbowPosition() < elbowFoldLimit;
   }
 
   public void setElbowPowerWithSafeties(double power){
     if (isElbowTooHigh(power)) {
       setElbowPower(0);
     } else if (isElbowTooLow(power)) {
-      setElbowPower(power); // TODO: REVERT (temp change until tweaked)
+      setElbowPower(power); // TODO: Be prepared to revert (as a temp change until tweaked)
     } else {
       setElbowPower(power);
     }
