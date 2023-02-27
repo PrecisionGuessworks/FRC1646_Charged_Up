@@ -13,11 +13,11 @@ public class BlinkinState extends CommandBase{
     @Override
     public void execute() {
         if (Controllers.getOperatorController().getRawButton(Controllers.PS4_Controller.Button.TRIANGLE)) {
-            blinkin.setYellowLED();
+            blinkin.setColor(Colors.YELLOW);
         } else if (Controllers.getOperatorController().getRawButton(Controllers.PS4_Controller.Button.SQUARE)) {
-            blinkin.setPurpleLED();
+            blinkin.setColor(Colors.PURPLE);
         } else if (Controllers.getOperatorController().getRawButton(Controllers.PS4_Controller.Button.CIRCLE)){
-            blinkin.setRedLED();
+            blinkin.setColor(Colors.RED);
         } else if (Controllers.getDriverController().getRawButton(Controllers.PS4_Controller.Button.CIRCLE)){
             blinkin.setColor(Colors.BLUE);
         } else {

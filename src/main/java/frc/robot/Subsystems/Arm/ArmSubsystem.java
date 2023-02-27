@@ -196,6 +196,9 @@ public class ArmSubsystem extends SubsystemBase {
   public void displayLimitSwitchStatus(){
     SmartDashboard.putString("Limit Switch", isElbowLimitSwitchTriggered() + "");
   }
+  public void displayEncoderTarget(){
+    SmartDashboard.putString("encoder target", elbowFoldLimit + "");
+  }
 
 
   @Override

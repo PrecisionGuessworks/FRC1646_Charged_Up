@@ -16,7 +16,7 @@ public class Constants {
    public static final class ArmConstants{
       // Shoulder
       public static final double SHOULDER_HIGH_LIMIT = 43.5;
-      public static final double SHOULDER_LOW_LIMIT = 3.5;
+      public static final double SHOULDER_LOW_LIMIT = 5.5;
       public static final double SHOULDER_HOLD_POWER = -0.13;
       public static final double SHOULDER_RAISE_SPEED = 0.75;
       public static final double SHOULDER_LOWER_SPEED = -0.75;
