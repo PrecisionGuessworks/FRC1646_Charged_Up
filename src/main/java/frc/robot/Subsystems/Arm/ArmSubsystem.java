@@ -15,8 +15,10 @@ import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.math.filter.MedianFilter;
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.math.filter.Debouncer.DebounceType;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -36,6 +38,7 @@ public class ArmSubsystem extends SubsystemBase {
   private SlewRateLimiter shoulderFilter, elbowFilter;
   
   private MedianFilter potFilter;
+  private Debouncer limitSwitchDebouncer;
 
   private DigitalInput limitSwitch;
 
@@ -70,15 +73,14 @@ public class ArmSubsystem extends SubsystemBase {
 
 
     // Extra Sensors
-    shoulderPot = new AnalogPotentiometer(RobotMap.SHOULDER_POT_LEFT_ID,100, Constants.ArmConstants.SHOULDER_POT_OFFSET);
+    shoulderPot = new AnalogPotentiometer(RobotMap.SHOULDER_POT_LEFT_ID,100, ArmConstants.SHOULDER_POT_OFFSET);
     limitSwitch = new DigitalInput(RobotMap.ELBBOW_LIMIT_SWITCH_ID); // 
 
     // Value Normalizing
-    shoulderFilter = new SlewRateLimiter(Constants.ArmConstants.SHOULDER_SLEW_RATE_LIMIT);
-    elbowFilter = new SlewRateLimiter(Constants.ArmConstants.ELBOW_SLEW_RATE_LIMIT);
+    shoulderFilter = new SlewRateLimiter(ArmConstants.SHOULDER_SLEW_RATE_LIMIT);
+    elbowFilter = new SlewRateLimiter(ArmConstants.ELBOW_SLEW_RATE_LIMIT);
     potFilter = new MedianFilter(5); // value is the sample size to take
-
-    
+    limitSwitchDebouncer = new Debouncer(ArmConstants.ELBOW_LIMIT_SWITCH_DEBOUNCE_TIME, DebounceType.kBoth);
   }
 
   public static ArmSubsystem getInstance(){
@@ -91,7 +93,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void resetFoldLimit(){
     if (isElbowLimitSwitchTriggered()) {
-      elbowFoldLimit = getElbowPosition() + Constants.ArmConstants.ELBOW_TRAVEL_DELTA; // TODO: depending signed vals, might need -/+
+      elbowFoldLimit = getElbowPosition() + ArmConstants.ELBOW_TRAVEL_DELTA; // TODO: depending signed vals, might need -/+
     }
   }
 
@@ -103,10 +105,10 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   private boolean isShoulderTooHigh(double power){
-    return power > 0.0 && getShoulderPosition() > Constants.ArmConstants.SHOULDER_HIGH_LIMIT;
+    return power > 0.0 && getShoulderPosition() > ArmConstants.SHOULDER_HIGH_LIMIT;
   }
   private boolean isShoulderTooLow(double power){
-    return power < 0.0 && getShoulderPosition() < Constants.ArmConstants.SHOULDER_LOW_LIMIT;
+    return power < 0.0 && getShoulderPosition() < ArmConstants.SHOULDER_LOW_LIMIT;
   }
 
   public void setShoulderPowerWithSafeties(double power){
@@ -190,7 +192,7 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public boolean isElbowLimitSwitchTriggered(){
-    return !limitSwitch.get();
+    return !limitSwitchDebouncer.calculate(limitSwitch.get());
   }
 
   public void displayLimitSwitchStatus(){
