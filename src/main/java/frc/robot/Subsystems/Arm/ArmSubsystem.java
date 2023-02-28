@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.fasterxml.jackson.databind.util.RawValue;
 
 import edu.wpi.first.math.filter.Debouncer;
 import edu.wpi.first.math.filter.MedianFilter;
@@ -37,7 +38,7 @@ public class ArmSubsystem extends SubsystemBase {
   private AnalogPotentiometer shoulderPot;
   private SlewRateLimiter shoulderFilter, elbowFilter;
   
-  private MedianFilter potFilter;
+  private MedianFilter potFilter, encoderFilter;
   private Debouncer limitSwitchDebouncer;
 
   private DigitalInput limitSwitch;
@@ -80,6 +81,7 @@ public class ArmSubsystem extends SubsystemBase {
     shoulderFilter = new SlewRateLimiter(ArmConstants.SHOULDER_SLEW_RATE_LIMIT);
     elbowFilter = new SlewRateLimiter(ArmConstants.ELBOW_SLEW_RATE_LIMIT);
     potFilter = new MedianFilter(5); // value is the sample size to take
+    encoderFilter = new MedianFilter(50);
     limitSwitchDebouncer = new Debouncer(ArmConstants.ELBOW_LIMIT_SWITCH_DEBOUNCE_TIME, DebounceType.kBoth);
   }
 
@@ -98,7 +100,6 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void setShoulderPower(double power){
-    // TODO: Add shoulder filter if desired
     power = shoulderFilter.calculate(power);
     shoulderLeftMotor.set(ControlMode.PercentOutput, power);
     shoulderRightMotor.set(ControlMode.PercentOutput, power);
@@ -121,17 +122,13 @@ public class ArmSubsystem extends SubsystemBase {
     }
   }
 
-  public void setShoulderPosition(double position){
+  public void setShoulderPositionByEncoder(double position){
     shoulderLeftMotor.set(ControlMode.Position, position);
     shoulderRightMotor.set(ControlMode.Position, position);
   }
 
   public double getShoulderPosition(){
-    return cleanPotValue(getShoulderPotValue());
-  }
-
-  public double cleanPotValue(double rawValue){
-    return potFilter.calculate(rawValue);
+    return potFilter.calculate(shoulderPot.get());
   }
 
   public void setElbowPower(double power){
@@ -142,7 +139,6 @@ public class ArmSubsystem extends SubsystemBase {
 
   private boolean isElbowTooHigh(double power){
     return isElbowLimitSwitchTriggered() && power > 0.0;
-    //return power > 0.0 && getElbowPosition() > Constants.ArmConstants.ELBOW_HIGH_LIMIT;
   }
   private boolean isElbowTooLow(double power){
     return power < 0.0 && getElbowPosition() < elbowFoldLimit;
@@ -158,7 +154,7 @@ public class ArmSubsystem extends SubsystemBase {
     }
   }
 
-  public void setElbowPosition(double position) {
+  public void setElbowPositionByEncoder(double position) {
     elbowLeftMotor.set(ControlMode.Position, position);
     elbowRightMotor.set(ControlMode.Position, position);
   }
@@ -167,24 +163,13 @@ public class ArmSubsystem extends SubsystemBase {
     return elbowLeftMotor.getSelectedSensorPosition();
   }
 
-  public void displayShoulderPosition(){
-    SmartDashboard.putString("Shoulder", getShoulderPosition() + "");
-  }
-  public void displayElbowPosition(){
-    SmartDashboard.putString("Elbow", getElbowPosition() + "");
-  }
-
   public void displayArmPositions(){
-    displayShoulderPosition();
-    displayElbowPosition();
+    SmartDashboard.putString("Shoulder Pot", getShoulderPosition() + "");
+    SmartDashboard.putString("Elbow Encoder", getElbowPosition() + "");
   }
 
-  public void displayShoulderPot(){
-    SmartDashboard.putString("Soulder Pot", getShoulderPotValue() + "");
-  }
-
-  public double getShoulderPotValue(){
-    return shoulderPot.get();
+  public double getShoulderEncoder(){
+    return encoderFilter.calculate(shoulderLeftMotor.getSelectedSensorPosition());
   }
 
   public void displayRequestedPower(String s, double power){
@@ -196,10 +181,10 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void displayLimitSwitchStatus(){
-    SmartDashboard.putString("Limit Switch", isElbowLimitSwitchTriggered() + "");
+    SmartDashboard.putString("Elbow Limit Switch", isElbowLimitSwitchTriggered() + "");
   }
   public void displayEncoderTarget(){
-    SmartDashboard.putString("encoder target", elbowFoldLimit + "");
+    SmartDashboard.putString("Elbow Encoder Target", elbowFoldLimit + "");
   }
 
 
