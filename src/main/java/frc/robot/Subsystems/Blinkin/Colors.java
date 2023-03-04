@@ -22,6 +22,7 @@ public enum Colors {
     DARK_BLUE (0.85),
     BLUE_VIOLET (0.89),
     YELLOW(0.69),
+    RAINBOW_COLOR_WAVES(-0.45),
     OFF(0.99);
 
 
