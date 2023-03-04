@@ -44,6 +44,9 @@ public class ArmSubsystem extends SubsystemBase {
   private DigitalInput limitSwitch;
 
   private double snapshotEncoder, elbowFoldLimit;
+
+  private double shoulderHoldPosition;
+  private boolean haveShoulderPosition;
   
 
   private ArmSubsystem() {
@@ -83,6 +86,9 @@ public class ArmSubsystem extends SubsystemBase {
     potFilter = new MedianFilter(5); // value is the sample size to take
     encoderFilter = new MedianFilter(50);
     limitSwitchDebouncer = new Debouncer(ArmConstants.ELBOW_LIMIT_SWITCH_DEBOUNCE_TIME, DebounceType.kBoth);
+
+    shoulderHoldPosition = getShoulderEncoder();
+    
   }
 
   public static ArmSubsystem getInstance(){
@@ -116,10 +122,23 @@ public class ArmSubsystem extends SubsystemBase {
     if (isShoulderTooHigh(power)) { 
       setShoulderPower(0);
     } else if (isShoulderTooLow(power)) {
-      setShoulderPower(0);
+      //setShoulderPower(0);
+      holdShoulder();
+    } else if (Math.abs(power) < 0.1) {
+      if (haveShoulderPosition) {
+        holdShoulder();
+      } else {
+        shoulderHoldPosition = getShoulderEncoder();
+        haveShoulderPosition = true;
+      }
     } else {
       setShoulderPower(power);
+      haveShoulderPosition = false;
     }
+  }
+
+  public void holdShoulder(){
+    setShoulderPositionByEncoder(shoulderHoldPosition);
   }
 
   public void setShoulderPositionByEncoder(double position){
@@ -185,6 +204,9 @@ public class ArmSubsystem extends SubsystemBase {
   }
   public void displayEncoderTarget(){
     SmartDashboard.putString("Elbow Encoder Target", elbowFoldLimit + "");
+    SmartDashboard.putString("Shoulder Encoder Left", getShoulderEncoder() + "");
+    SmartDashboard.putString("Shoulder Encoder Right", shoulderRightMotor.getSelectedSensorPosition() + "");
+    SmartDashboard.putString("Hold Shoulder Position", shoulderHoldPosition + "");
   }
 
 
