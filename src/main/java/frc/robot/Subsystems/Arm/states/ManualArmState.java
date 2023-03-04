@@ -34,7 +34,6 @@ public class ManualArmState extends CommandBase {
     
     // Send data to SmartDashboard for viewing
     arm.displayArmPositions();
-    arm.displayShoulderPot();
     arm.displayRequestedPower("Shoulder", shoulderPower);
     arm.displayRequestedPower("Elbow", elbowPower);
     arm.displayLimitSwitchStatus();
