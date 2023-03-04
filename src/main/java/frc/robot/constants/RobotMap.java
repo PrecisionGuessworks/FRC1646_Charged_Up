@@ -22,7 +22,7 @@ public class RobotMap {
     
     // Sensors
     public static final int SHOULDER_POT_LEFT_ID = 0;
-    public static final int ELBBOW_LIMIT_SWITCH_ID = 0;
+    public static final int ELBBOW_LIMIT_SWITCH_ID = 9;
 
     // PWM outputs
     public static final int BLINKIN_ID = 9;
