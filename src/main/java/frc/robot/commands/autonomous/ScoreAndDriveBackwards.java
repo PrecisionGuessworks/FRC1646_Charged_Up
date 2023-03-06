@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Subsystems.Arm.states.RaiseElbowState;
 import frc.robot.Subsystems.Arm.states.RaiseShoulderState;
 import frc.robot.Subsystems.Drivetrain.states.DriveBackwards;
+import frc.robot.Subsystems.Intake.states.OuttakingState;
 
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -24,10 +25,11 @@ public class ScoreAndDriveBackwards extends SequentialCommandGroup {
         new RaiseElbowState().withTimeout(0.75),
 
         // spit out
+        new OuttakingState().withTimeout(1.0),
 
         // refold
 
-        
+
         // drive backwards
         new DriveBackwards().withTimeout(1.5)
 
