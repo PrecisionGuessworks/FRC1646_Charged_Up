@@ -13,6 +13,6 @@ public class RaiseShoulderState extends CommandBase {
 
     @Override
     public void initialize() {
-        arm.setShoulderPowerWithSafeties(Constants.ArmConstants.SHOULDER_RAISE_SPEED);
+        arm.setShoulderPowerWithSafeties(Constants.ArmConstants.SHOULDER_SPEED);
     }
 }

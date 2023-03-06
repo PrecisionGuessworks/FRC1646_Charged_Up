@@ -2,17 +2,18 @@ package frc.robot.Subsystems.Arm.states;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.Arm.ArmSubsystem;
-import frc.robot.constants.Constants;
+import frc.robot.constants.Constants.ArmConstants;
 
-public class LowerShoulderState extends CommandBase {
+public class RaiseArmState extends CommandBase {
     private ArmSubsystem arm = ArmSubsystem.getInstance();
 
-    public LowerShoulderState() {
+    public RaiseArmState() {
         addRequirements(arm);
     }
 
     @Override
     public void initialize() {
-        arm.setShoulderPowerWithSafeties(-1 * Constants.ArmConstants.SHOULDER_SPEED);
+        arm.setShoulderPowerWithSafeties(ArmConstants.SHOULDER_SPEED);
+        arm.setElbowPowerWithSafeties(ArmConstants.ELBOW_SPEED);
     }
 }
