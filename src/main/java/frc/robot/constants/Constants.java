@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Constants {
    public static final class DriveConstants{
-    public static final double THROTTLE_SCALER = 0.7;
+    public static final double THROTTLE_SCALER = 0.8;
     public static final double ROTATION_SCALE = 0.3;
 
     public static final double TS = SmartDashboard.getNumber("Throttle Scalar", 0.8);
@@ -19,7 +19,7 @@ public class Constants {
       public static final double SHOULDER_HIGH_LIMIT = 43.5;
       public static final double SHOULDER_LOW_LIMIT = 6.8;
       public static final double SHOULDER_HOLD_POWER = -0.13;
-      public static final double SHOULDER_SPEED = 0.5;
+      public static final double SHOULDER_SPEED = 0.6;
 
       public static final double SHOULDER_ROTATION_SCALAR = -0.8;
 
@@ -44,7 +44,7 @@ public class Constants {
       public static final double ELBOW_ROTATION_SCALAR = -0.7;
 
       public static final double ELBOW_HOLD_POWER = -0.13;
-      public static final double ELBOW_SLEW_RATE_LIMIT = 0.9;
+      public static final double ELBOW_SLEW_RATE_LIMIT = 1.1;
       public static final double ELBOW_SPEED = -0.5;
 
       public static final double ELBOW_TRAVEL_DELTA = 10000;
