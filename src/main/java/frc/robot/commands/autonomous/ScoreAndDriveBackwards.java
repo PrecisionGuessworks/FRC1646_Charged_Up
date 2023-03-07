@@ -16,22 +16,28 @@ import frc.robot.Subsystems.Intake.states.OuttakingState;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ScoreAndDriveBackwards extends SequentialCommandGroup {
   /** Creates a new ScoreAndDriveBackwards. */
+
   public ScoreAndDriveBackwards() {
+    addSequential(new RaiseShoulderState().withTimeout(0.25));
+
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        // Arm unfold
-        new RaiseShoulderState().withTimeout(0.5),
-        new RaiseElbowState().withTimeout(0.75),
+      new SequentialCommandGroup(
+                // Arm unfold
+        new RaiseShoulderState().withTimeout(0.25),
 
+        new RaiseElbowState().withTimeout(0.8)
+      ),
+        
         // spit out
-        new OuttakingState().withTimeout(1.0),
+        new OuttakingState().withTimeout(1.0)
 
         // refold
 
 
         // drive backwards
-        new DriveBackwards().withTimeout(1.5)
+        //new DriveBackwards().withTimeout(1.5)
 
     );
   }

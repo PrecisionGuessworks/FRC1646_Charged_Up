@@ -15,4 +15,5 @@ public class RaiseShoulderState extends CommandBase {
     public void initialize() {
         arm.setShoulderPowerWithSafeties(Constants.ArmConstants.SHOULDER_SPEED);
     }
+
 }

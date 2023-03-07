@@ -22,6 +22,8 @@ import frc.robot.Subsystems.Intake.IntakeSubsystem;
 import frc.robot.Subsystems.Intake.states.ManualIntakeState;
 import frc.robot.Subsystems.Wrist.WristSubsystem;
 import frc.robot.Subsystems.Wrist.states.ManualWristState;
+import frc.robot.commands.autonomous.DriveBackwardsAuto;
+import frc.robot.commands.autonomous.ScoreAndDriveBackwards;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -87,10 +89,9 @@ public class RobotContainer {
     Joystick op_joystick = Controllers.getOperatorController();
 
   } 
-  // public Command getAutonomousCommand() {
-  //   // An ExampleCommand will run in autonomous
-  //   //return new ScoreAndDriveBackwards();
-  // }
+  public Command getAutonomousCommand() {
+    return new ScoreAndDriveBackwards();
+  }
 
 
 }
