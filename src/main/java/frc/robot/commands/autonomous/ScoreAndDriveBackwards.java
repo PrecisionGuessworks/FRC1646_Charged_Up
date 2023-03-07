@@ -21,7 +21,10 @@ import frc.robot.constants.Constants.ArmConstants;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ScoreAndDriveBackwards extends SequentialCommandGroup {
   /** Creates a new ScoreAndDriveBackwards. */
+
   public ScoreAndDriveBackwards() {
+    //addSequential(new RaiseShoulderState().withTimeout(0.25));
+
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
@@ -38,7 +41,7 @@ public class ScoreAndDriveBackwards extends SequentialCommandGroup {
 
 
         // drive backwards
-        new DriveBackwards().withTimeout(1.5)
+        //new DriveBackwards().withTimeout(1.5)
 
     );
   }

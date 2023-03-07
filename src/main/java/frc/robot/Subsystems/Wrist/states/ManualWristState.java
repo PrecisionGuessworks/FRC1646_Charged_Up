@@ -19,7 +19,7 @@ public class ManualWristState extends CommandBase{
         powers[1] = Controllers.getOperatorController().getRawAxis(Controllers.PS4_Controller.Axis.RIGHT_STICK_Y);
 
         wrist.setSupinationPowerWithSafeties(powers[0] * Constants.WristConstants.SUPINATION_SCALAR);
-        wrist.setFlexionPowerWithSafeties(powers[1] * Constants.WristConstants.FLEXION_SCALAR);
+        wrist.setFlexionPower(powers[1] * Constants.WristConstants.FLEXION_SCALAR);
 
         wrist.displayWristPositions();
     }
