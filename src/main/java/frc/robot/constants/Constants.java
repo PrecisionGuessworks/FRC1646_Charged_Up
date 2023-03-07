@@ -26,6 +26,9 @@ public class Constants {
       public static final double SHOULDER_SLEW_RATE_LIMIT = 0.75;
       public static final int SHOULDER_POT_OFFSET = -25;
 
+      public static final double SHOULDER_HIGH_CUBE_POT_VALUE = 45;
+      public static final double SHOULDER_POT_TOLERANCE = 3;
+
       // Profiled PID Constants
       public static final double SHOULDER_CRUISE = 120.0;
       public static final double SHOULDER_ACCELERAION = 200.0;

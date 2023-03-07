@@ -4,11 +4,16 @@
 
 package frc.robot.commands.autonomous;
 
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Subsystems.Arm.states.RaiseElbowState;
 import frc.robot.Subsystems.Arm.states.RaiseShoulderState;
+import frc.robot.Subsystems.Arm.states.MoveShoulderToPotTarget;
 import frc.robot.Subsystems.Drivetrain.states.DriveBackwards;
 import frc.robot.Subsystems.Intake.states.OuttakingState;
+import frc.robot.constants.Constants;
+import frc.robot.constants.Constants.ArmConstants;
 
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -20,14 +25,16 @@ public class ScoreAndDriveBackwards extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        // Arm unfold
-        new RaiseShoulderState().withTimeout(0.5),
-        new RaiseElbowState().withTimeout(0.75),
+      // Raise shoulder
+      new MoveShoulderToPotTarget(ArmConstants.SHOULDER_HIGH_CUBE_POT_VALUE),
+      new WaitCommand(0.25),
 
-        // spit out
-        new OuttakingState().withTimeout(1.0),
+      new RaiseElbowState().withTimeout(0.75),
 
-        // refold
+      // spit out
+      new OuttakingState().withTimeout(1.0),
+
+      // refold
 
 
         // drive backwards

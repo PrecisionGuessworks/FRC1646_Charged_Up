@@ -7,6 +7,7 @@ package frc.robot.Subsystems.Arm.states;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.Arm.ArmSubsystem;
 import frc.robot.constants.Constants;
+import frc.robot.constants.Constants.ArmConstants;
 import frc.robot.lib.Controllers;
 
 public class ManualArmState extends CommandBase {
@@ -22,6 +23,11 @@ public class ManualArmState extends CommandBase {
     double shoulderPower = Controllers.getOperatorController().getRawAxis(Controllers.PS4_Controller.Axis.LEFT_STICK_Y);
     double elbowPower = Controllers.getOperatorController().getRawAxis(Controllers.PS4_Controller.Axis.LEFT_STICK_X);
 
+    if (Controllers.getOperatorController().getRawButtonPressed(Controllers.PS4_Controller.Button.OPTIONS)){
+      new MoveShoulderToPotTarget(ArmConstants.SHOULDER_HIGH_CUBE_POT_VALUE);
+    } else {
+      
+    }
     // Shoulder + Elbow Values
     shoulderPower = Constants.ArmConstants.SHOULDER_ROTATION_SCALAR * shoulderPower;
     elbowPower = Constants.ArmConstants.ELBOW_ROTATION_SCALAR * elbowPower;
