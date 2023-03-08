@@ -21,5 +21,6 @@ public class MoveShoulderToPotTarget extends CommandBase {
             sign = (currentPot > potTarget) ? -1 : 1;
             arm.setShoulderPowerWithSafeties(sign * Constants.ArmConstants.SHOULDER_SPEED);
         }
+        arm.setShoulderPositionByEncoder(0);
     }
 }

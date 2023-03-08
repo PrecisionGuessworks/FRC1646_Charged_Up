@@ -7,13 +7,16 @@ package frc.robot.commands.autonomous;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.Subsystems.Arm.states.RaiseElbowState;
+import frc.robot.Subsystems.Arm.states.MoveElbowState;
 import frc.robot.Subsystems.Arm.states.RaiseShoulderState;
+import frc.robot.Subsystems.Arm.states.StopElbowState;
 import frc.robot.Subsystems.Arm.states.MoveShoulderToPotTarget;
+import frc.robot.Subsystems.Arm.states.RaiseElbowState;
 import frc.robot.Subsystems.Drivetrain.states.DriveBackwards;
 import frc.robot.Subsystems.Intake.states.OuttakingState;
 import frc.robot.constants.Constants;
 import frc.robot.constants.Constants.ArmConstants;
+import frc.robot.constants.Constants.ArmConstants.EblowMovement;
 
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -29,16 +32,28 @@ public class ScoreAndDriveBackwards extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       // Raise shoulder
-      new MoveShoulderToPotTarget(ArmConstants.SHOULDER_HIGH_CUBE_POT_VALUE),
-      new WaitCommand(0.25),
 
-      new RaiseElbowState().withTimeout(0.75),
+      new RaiseElbowState().withTimeout(0.5),
+      new WaitCommand(0.5),
+      new MoveElbowState(EblowMovement.STOP),
+
+
+      new MoveShoulderToPotTarget(ArmConstants.SHOULDER_HIGH_CUBE_POT_VALUE),
+      //new WaitCommand(0.25),
+      
+      
 
       // spit out
       new OuttakingState().withTimeout(1.0),
 
       // refold
+      new MoveElbowState(EblowMovement.LOWER),
+      new WaitCommand(0.5),
+      new MoveElbowState(EblowMovement.STOP),
 
+      // lower shoulder
+      new MoveShoulderToPotTarget(ArmConstants.SHOULDER_STOWED_POT_VALUE),
+      new WaitCommand(0.5)
 
         // drive backwards
         //new DriveBackwards().withTimeout(1.5)

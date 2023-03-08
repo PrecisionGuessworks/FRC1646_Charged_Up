@@ -26,7 +26,8 @@ public class Constants {
       public static final double SHOULDER_SLEW_RATE_LIMIT = 0.75;
       public static final int SHOULDER_POT_OFFSET = -25;
 
-      public static final double SHOULDER_HIGH_CUBE_POT_VALUE = 45;
+      public static final double SHOULDER_HIGH_CUBE_POT_VALUE = 19;
+      public static final double SHOULDER_STOWED_POT_VALUE = 7;
       public static final double SHOULDER_POT_TOLERANCE = 3;
 
       // Profiled PID Constants
@@ -71,6 +72,9 @@ public class Constants {
 
       public static final int TIMEOUT = 10;
 
+      public static enum EblowMovement{
+         LOWER, RAISE, STOP
+      }
       public static enum ArmPosition{
           STOWED, HIGH_NODE, MED_NODE, MED_CUBE, HIGH_CUBE, GROUND_SCORE, FEEDER_STATION
           // WHAT ARE THESE SCORING LOCATIONS CALLED???

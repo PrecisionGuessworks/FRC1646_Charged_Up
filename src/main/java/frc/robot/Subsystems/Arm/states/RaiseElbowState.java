@@ -2,7 +2,7 @@ package frc.robot.Subsystems.Arm.states;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.Arm.ArmSubsystem;
-import frc.robot.constants.Constants;
+import frc.robot.constants.Constants.ArmConstants;
 
 public class RaiseElbowState extends CommandBase {
     private ArmSubsystem arm = ArmSubsystem.getInstance();
@@ -13,6 +13,6 @@ public class RaiseElbowState extends CommandBase {
 
     @Override
     public void initialize() {
-        arm.setElbowPowerWithSafeties(Constants.ArmConstants.ELBOW_SPEED);
+        arm.setElbowPowerWithSafeties(ArmConstants.ELBOW_SPEED);
     }
 }
