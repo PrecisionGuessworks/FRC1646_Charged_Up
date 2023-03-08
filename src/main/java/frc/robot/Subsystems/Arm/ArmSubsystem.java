@@ -136,6 +136,7 @@ public class ArmSubsystem extends SubsystemBase {
       haveShoulderPosition = false;
     }
   }
+  
 
   public void holdShoulder(){
     setShoulderPositionByEncoder(shoulderHoldPosition);
