@@ -36,21 +36,7 @@ public class BlinkinSubsystem extends SubsystemBase{
         }
     }
 
-    public void setRedLED(){
-        blinkin.set(0.61);
-    }
-    public void setWhiteLED(){
-        blinkin.set(0.93);
-    }
-    public void setPurpleLED(){
-        blinkin.set(0.91);
-    }
-    public void setYellowLED(){
-        blinkin.set(0.69);
-    }
-    public void setBlueLED(){
-        blinkin.set(0.87);
-    }
+
 
 
     @Override
