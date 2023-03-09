@@ -2,28 +2,34 @@ package frc.robot.Subsystems.Blinkin;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.lib.Controllers;
+import frc.robot.lib.Controllers.PS4_Controller;
 
 public class BlinkinState extends CommandBase{
     private BlinkinSubsystem blinkin = BlinkinSubsystem.getInstance();
+    private boolean yellowOn, purpleOn, doneSignalling;
 
     public BlinkinState(){
         addRequirements(blinkin);
+        blinkin.setBlinkinToAllianceColor();
+        doneSignalling = true;
     }
 
     @Override
     public void execute() {
-        if (Controllers.getOperatorController().getRawButton(Controllers.PS4_Controller.Button.TRIANGLE)) {
+        if (Controllers.getOperatorController().getRawButton(PS4_Controller.Button.TRIANGLE)) {
             blinkin.setColor(Colors.YELLOW);
-        } else if (Controllers.getOperatorController().getRawButton(Controllers.PS4_Controller.Button.SQUARE)) {
+            doneSignalling = false;
+        } else if (Controllers.getOperatorController().getRawButton(PS4_Controller.Button.SQUARE)) {
             blinkin.setColor(Colors.PURPLE);
-        } else if (Controllers.getOperatorController().getRawButton(Controllers.PS4_Controller.Button.CIRCLE)){
-            blinkin.setColor(Colors.RED);
-        } else if (Controllers.getDriverController().getRawButton(Controllers.PS4_Controller.Button.CIRCLE)){
-            blinkin.setColor(Colors.BLUE);
-        } else if (Controllers.getDriverController().getRawButton(Controllers.PS4_Controller.Button.SQUARE)){
+            doneSignalling = false;
+        } else if (Controllers.getDriverController().getRawButton(PS4_Controller.Button.SQUARE)){
             blinkin.setColor(Colors.RAINBOW_COLOR_WAVES);
-        } else {
-            blinkin.setWhiteLED();
+            doneSignalling = false;
+        } else if (Controllers.getOperatorController().getRawButton(PS4_Controller.Button.R1_Bumper)) {
+            blinkin.setBlinkinToAllianceColor();
+            doneSignalling = true;
+        } else if (doneSignalling) {
+            blinkin.setBlinkinToAllianceColor();
         }
     }
 }
