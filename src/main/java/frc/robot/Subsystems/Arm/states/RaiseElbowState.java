@@ -13,6 +13,11 @@ public class RaiseElbowState extends CommandBase {
 
     @Override
     public void initialize() {
+        System.out.println("Hello from Raise Elbow");
         arm.setElbowPowerWithSafeties(ArmConstants.ELBOW_SPEED);
     }
+    public void execute() {
+        arm.setElbowPositionByEncoder(-75000);
+    }
+
 }
