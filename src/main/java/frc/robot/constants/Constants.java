@@ -19,7 +19,7 @@ public class Constants {
       public static final double SHOULDER_HIGH_LIMIT = 43.5;
       public static final double SHOULDER_LOW_LIMIT = 6.8;
       public static final double SHOULDER_HOLD_POWER = -0.13;
-      public static final double SHOULDER_SPEED = 0.6;
+      public static final double SHOULDER_SPEED = 0.36;
 
       public static final double SHOULDER_ROTATION_SCALAR = -0.8;
 
