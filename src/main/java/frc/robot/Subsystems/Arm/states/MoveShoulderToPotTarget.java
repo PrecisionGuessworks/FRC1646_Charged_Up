@@ -17,10 +17,24 @@ public class MoveShoulderToPotTarget extends CommandBase {
 
     @Override
     public void initialize() {
-        while(Math.abs(arm.getShoulderPosition() - potTarget) > ArmConstants.SHOULDER_POT_TOLERANCE) {
-            sign = (currentPot > potTarget) ? -1 : 1;
-            arm.setShoulderPowerWithSafeties(sign * Constants.ArmConstants.SHOULDER_SPEED);
-        }
-        arm.setShoulderPositionByEncoder(0);
+    }
+
+    public void execute(){
+        sign = (currentPot > potTarget) ? -1 : 1;
+        arm.setShoulderPowerWithSafeties(sign * Constants.ArmConstants.SHOULDER_SPEED);
+        System.out.println("Shoulder target status: " + arm.isAtTarget(potTarget));
+    }
+
+    public boolean isFinished(){
+        System.out.println("Shoulder target status: " + arm.isAtTarget(potTarget));
+        arm.setShoulderPowerWithSafeties(0);
+        return arm.isAtTarget(potTarget);
+    }
+    public void interrupted(){
+        arm.setShoulderPowerWithSafeties(0);
+    }
+    public void end(){
+        arm.setShoulderPowerWithSafeties(0);
+        System.out.println("MoveShouderToPotTarget Ended");
     }
 }
