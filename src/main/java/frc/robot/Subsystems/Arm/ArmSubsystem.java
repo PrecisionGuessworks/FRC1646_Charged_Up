@@ -142,6 +142,10 @@ public class ArmSubsystem extends SubsystemBase {
     setShoulderPositionByEncoder(shoulderHoldPosition);
   }
 
+  public boolean isAtTarget(double target){
+    return Math.abs(target - getShoulderPosition()) < ArmConstants.SHOULDER_POT_TOLERANCE;
+  }
+
   public void setShoulderPositionByEncoder(double position){
     shoulderLeftMotor.set(ControlMode.Position, position);
     shoulderRightMotor.set(ControlMode.Position, position);
