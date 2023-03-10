@@ -25,7 +25,7 @@ public class BlinkinState extends CommandBase{
         } else if (Controllers.getDriverController().getRawButton(PS4_Controller.Button.SQUARE)){
             blinkin.setColor(Colors.RAINBOW_COLOR_WAVES);
             doneSignalling = false;
-        } else if (Controllers.getOperatorController().getRawButton(PS4_Controller.Button.R1_Bumper)) {
+        } else if (Controllers.getOperatorController().getRawButton(PS4_Controller.Button.L1_Bumper)) {
             blinkin.setBlinkinToAllianceColor();
             doneSignalling = true;
         } else if (doneSignalling) {
