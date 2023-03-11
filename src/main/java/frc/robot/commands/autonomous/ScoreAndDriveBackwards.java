@@ -33,21 +33,24 @@ public class ScoreAndDriveBackwards extends SequentialCommandGroup {
     addCommands(
       
       new MoveShoulderToPotTarget(ArmConstants.SHOULDER_HIGH_CUBE_POT_VALUE),
-      new MoveElbowState(EblowMovement.STOP)
+      new MoveElbowState(EblowMovement.RAISE).withTimeout(0.5),
+      new MoveElbowState(EblowMovement.STOP),
+
+      // articulate wrist????
+
       // // spit out
-      // new OuttakingState().withTimeout(1.0),
+      new OuttakingState().withTimeout(1.0),
 
       // // refold
-      // new MoveElbowState(EblowMovement.LOWER),
-      // new WaitCommand(0.5),
-      // new MoveElbowState(EblowMovement.STOP),
+      new MoveElbowState(EblowMovement.LOWER).withTimeout(0.5),
+      new MoveElbowState(EblowMovement.STOP),
 
       // // lower shoulder
-      // new MoveShoulderToPotTarget(ArmConstants.SHOULDER_STOWED_POT_VALUE),
-      // new WaitCommand(0.5)
+      new MoveShoulderToPotTarget(ArmConstants.SHOULDER_STOWED_POT_VALUE)
 
-        // drive backwards
-        //new DriveBackwards().withTimeout(1.5)
+      // drive backwards
+      //new DriveBackwards().withTimeout(1.5)
+
 
     );
   }

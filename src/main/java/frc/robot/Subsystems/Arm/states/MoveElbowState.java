@@ -23,6 +23,15 @@ public class MoveElbowState extends CommandBase {
         } else {
             arm.setElbowPowerWithSafeties(0);
         }
-        
+    }
+
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        arm.setElbowPowerWithSafeties(0);
     }
 }

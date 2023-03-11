@@ -27,13 +27,11 @@ public class MoveShoulderToPotTarget extends CommandBase {
 
     public boolean isFinished(){
         System.out.println("Shoulder target status: " + arm.isAtTarget(potTarget));
-        arm.setShoulderPowerWithSafeties(0);
         return arm.isAtTarget(potTarget);
     }
-    public void interrupted(){
-        arm.setShoulderPowerWithSafeties(0);
-    }
-    public void end(){
+
+    @Override
+    public void end(boolean interrupted){
         arm.setShoulderPowerWithSafeties(0);
         System.out.println("MoveShouderToPotTarget Ended");
     }

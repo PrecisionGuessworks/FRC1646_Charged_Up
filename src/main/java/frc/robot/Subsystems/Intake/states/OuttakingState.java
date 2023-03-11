@@ -21,4 +21,14 @@ public class OuttakingState extends CommandBase {
     intake.setPower(IntakeConstants.OUTTAKING_SPEED);
   }
 
+  @Override
+    public boolean isFinished() {
+        return false;
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        intake.setPower(0);
+    }
+
 }

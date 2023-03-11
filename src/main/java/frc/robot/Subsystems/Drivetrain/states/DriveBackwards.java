@@ -18,4 +18,14 @@ public class DriveBackwards extends CommandBase {
     drive.curvatureDrive(0.35, 0);
   }
 
+  @Override
+    public boolean isFinished() {
+        return false;
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        drive.curvatureDrive(0, 0);
+    }
+
 }
