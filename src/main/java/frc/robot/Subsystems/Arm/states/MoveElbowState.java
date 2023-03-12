@@ -17,11 +17,11 @@ public class MoveElbowState extends CommandBase {
     @Override
     public void initialize() {
         if (desireMotion == EblowMovement.RAISE){
-            arm.setElbowPowerWithSafeties(-1 * Constants.ArmConstants.ELBOW_SPEED);
-        } else if (desireMotion == EblowMovement.LOWER) {
             arm.setElbowPowerWithSafeties(Constants.ArmConstants.ELBOW_SPEED);
+        } else if (desireMotion == EblowMovement.LOWER) {
+            arm.setElbowPowerWithSafeties(-1 * Constants.ArmConstants.ELBOW_SPEED);
         } else {
-            arm.setElbowPowerWithSafeties(0);
+            arm.stopElbow();
         }
     }
 
@@ -32,6 +32,6 @@ public class MoveElbowState extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        arm.setElbowPowerWithSafeties(0);
+        arm.stopElbow();
     }
 }
