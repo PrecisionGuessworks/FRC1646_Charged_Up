@@ -32,7 +32,7 @@ public class MoveShoulderToPotTarget extends CommandBase {
 
     @Override
     public void end(boolean interrupted){
-        arm.setShoulderPowerWithSafeties(0);
+        arm.stopShoulder();
         System.out.println("MoveShouderToPotTarget Ended");
     }
 }
