@@ -18,7 +18,7 @@ public class OuttakingState extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.setPower(IntakeConstants.OUTTAKING_SPEED);
+    intake.setPower(-1 * IntakeConstants.OUTTAKING_SPEED);
   }
 
   @Override
