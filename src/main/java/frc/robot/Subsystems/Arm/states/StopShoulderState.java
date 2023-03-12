@@ -11,13 +11,12 @@ public class StopShoulderState extends CommandBase {
     }
     @Override
     public void initialize() {
-        arm.setShoulderPowerWithSafeties(0);
+        arm.setShoulderPower(0);
         System.out.println("Hello from Stop Shoulder");
     }
-    public void interrupted(){
-        end(true);
-    }
-    public boolean end(){
+
+    @Override
+    public boolean isFinished() {
         return true;
     }
 }
