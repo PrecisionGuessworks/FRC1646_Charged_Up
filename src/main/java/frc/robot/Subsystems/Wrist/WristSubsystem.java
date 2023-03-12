@@ -77,7 +77,9 @@ public class WristSubsystem extends SubsystemBase{
             setFlexionPower(power);
         }
     }
-
+    public void stopFlexion(){
+        flexionMotor.set(ControlMode.PercentOutput, 0);
+    }
     public double getSupinationPosition(){
         return supinationMotor.getSelectedSensorPosition();
     }
