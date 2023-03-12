@@ -24,7 +24,7 @@ public class ManualArmState extends CommandBase {
     double elbowPower = Controllers.getOperatorController().getRawAxis(Controllers.PS4_Controller.Axis.LEFT_STICK_X);
 
     if (Controllers.getOperatorController().getRawButtonPressed(Controllers.PS4_Controller.Button.OPTIONS)){
-      new MoveShoulderToPotTarget(ArmConstants.SHOULDER_HIGH_CUBE_POT_VALUE);
+      new MoveShoulderToPotTarget(ArmConstants.SHOULDER_MID_CUBE_POT_VALUE);
     } else {
       
     }
