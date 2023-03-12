@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Constants {
    public static final class DriveConstants{
     public static final double THROTTLE_SCALER = 0.8;
-    public static final double ROTATION_SCALE = 0.3;
+    public static final double ROTATION_SCALE = 0.2;
 
     public static final double TS = SmartDashboard.getNumber("Throttle Scalar", 0.8);
 
@@ -16,8 +16,8 @@ public class Constants {
 
    public static final class ArmConstants{
       // Shoulder
-      public static final double SHOULDER_HIGH_LIMIT = 43.5;
-      public static final double SHOULDER_LOW_LIMIT = 6.8;
+      public static final double SHOULDER_HIGH_LIMIT = 26; // 43.5
+      public static final double SHOULDER_LOW_LIMIT = -9; // old: 6.8
       public static final double SHOULDER_HOLD_POWER = -0.13;
       public static final double SHOULDER_SPEED = 0.36;
 
@@ -26,9 +26,11 @@ public class Constants {
       public static final double SHOULDER_SLEW_RATE_LIMIT = 0.75;
       public static final int SHOULDER_POT_OFFSET = -25;
 
-      public static final double SHOULDER_HIGH_CUBE_POT_VALUE = 19;
-      public static final double SHOULDER_STOWED_POT_VALUE = 7;
-      public static final double SHOULDER_POT_TOLERANCE = 3;
+      public static final double SHOULDER_HIGH_CUBE_POT_VALUE = 15;
+      public static final double SHOULDER_MID_CUBE_POT_VALUE = 15;
+      public static final double SHOULDER_STOWED_POT_VALUE = -8;
+      public static final double SHOULDER_POT_TOLERANCE = 1;
+      public static final double SHOULDER_ENCODER_BOTTOM = 18000;
 
       // Profiled PID Constants
       public static final double SHOULDER_CRUISE = 120.0;
@@ -49,7 +51,7 @@ public class Constants {
 
       public static final double ELBOW_HOLD_POWER = -0.13;
       public static final double ELBOW_SLEW_RATE_LIMIT = 1.1;
-      public static final double ELBOW_SPEED = -0.5;
+      public static final double ELBOW_SPEED = -0.25;
 
       public static final double ELBOW_TRAVEL_DELTA = 10000;
       public static final double ELBOW_LIMIT_SWITCH_DEBOUNCE_TIME = 0.1;
@@ -89,9 +91,10 @@ public class Constants {
 
       public static final double SUPINATION_SCALAR = 0.35;
       public static final double FLEXION_SCALAR = 0.25;
+      public static final double FLEXION_SPEED = 0.25;
 
       public static enum WristFlexionPosition{
-         STRAIGHT_OUT, FEEDER
+         RAISE, LOWER, STOP
          // idk, maybe
       }
       public static enum WristSupinationPosition{
