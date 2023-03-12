@@ -105,6 +105,11 @@ public class ArmSubsystem extends SubsystemBase {
     }
   }
 
+  public void stopShoulder(){
+    shoulderLeftMotor.set(ControlMode.PercentOutput, 0);
+    shoulderRightMotor.set(ControlMode.PercentOutput, 0);
+  }
+
   public void setShoulderPower(double power){
     power = shoulderFilter.calculate(power);
     shoulderLeftMotor.set(ControlMode.PercentOutput, power);
@@ -115,7 +120,8 @@ public class ArmSubsystem extends SubsystemBase {
     return power > 0.0 && getShoulderPosition() > ArmConstants.SHOULDER_HIGH_LIMIT;
   }
   private boolean isShoulderTooLow(double power){
-    return power < 0.0 && getShoulderPosition() < ArmConstants.SHOULDER_LOW_LIMIT;
+    return power < 0.0 && getShoulderEncoder() < ArmConstants.SHOULDER_ENCODER_BOTTOM;
+    //return power < 0.0 && getShoulderPosition() < ArmConstants.SHOULDER_LOW_LIMIT;
   }
 
   public void setShoulderPowerWithSafeties(double power){
@@ -176,6 +182,10 @@ public class ArmSubsystem extends SubsystemBase {
     } else {
       setElbowPower(power);
     }
+  }
+  public void stopElbow(){
+    elbowLeftMotor.set(ControlMode.PercentOutput, 0);
+    elbowRightMotor.set(ControlMode.PercentOutput, 0);
   }
 
   public void setElbowPositionByEncoder(double position) {
