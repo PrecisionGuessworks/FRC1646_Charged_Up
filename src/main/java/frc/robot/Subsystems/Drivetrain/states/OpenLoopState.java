@@ -13,6 +13,7 @@ public class OpenLoopState extends CommandBase {
 
   DrivetrainSubsystem drive = DrivetrainSubsystem.getInstance();
   double throttle, rotation;
+  boolean halfSpeedRequested = false;
 
   public OpenLoopState() {
     // this.throttle = throttle;
@@ -24,6 +25,16 @@ public class OpenLoopState extends CommandBase {
   public void execute() {
     throttle = Controllers.getDriverController().getRawAxis(Controllers.PS4_Controller.Axis.LEFT_STICK_Y);
     rotation = Controllers.getDriverController().getRawAxis(Controllers.PS4_Controller.Axis.RIGHT_STICK_X);
+
+    if(Controllers.getDriverController().getRawButton(Controllers.PS4_Controller.Button.R1_Bumper)){
+      halfSpeedRequested = true;
+    } else {
+      halfSpeedRequested = false;
+    }
+    
+    if(halfSpeedRequested) {
+      throttle *= 0.5;
+    }
 
     drive.curvatureDrive(throttle * DriveConstants.THROTTLE_SCALER, rotation * DriveConstants.ROTATION_SCALE);
   }
