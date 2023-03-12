@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.PS4Controller.Button;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
-
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.lib.Controllers;
 import frc.robot.Subsystems.Arm.ArmSubsystem;
 import frc.robot.Subsystems.Arm.states.ManualArmState;
@@ -22,9 +23,11 @@ import frc.robot.Subsystems.Intake.IntakeSubsystem;
 import frc.robot.Subsystems.Intake.states.ManualIntakeState;
 import frc.robot.Subsystems.Wrist.WristSubsystem;
 import frc.robot.Subsystems.Wrist.states.ManualWristState;
-import frc.robot.commands.NewScoreAuto;
-import frc.robot.commands.autonomous.DriveBackwardsAuto;
-import frc.robot.commands.autonomous.ScoreAndDriveBackwards;
+import frc.robot.commands.autonomous.DriveBackwardsAutoCableBerm;
+import frc.robot.commands.autonomous.HighCube;
+import frc.robot.commands.autonomous.HighCubeNoBerm;
+import frc.robot.commands.autonomous.MidCubeAuto;
+import frc.robot.commands.autonomous.MidCubeNoBerm;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -37,7 +40,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-
+  SendableChooser<Command> autoPicker;
 
   DrivetrainSubsystem drive;
   ArmSubsystem arm;
@@ -52,6 +55,16 @@ public class RobotContainer {
     initilizePowerDistrubutionBoard();
     setAllDefaultCommands();
     configureButtonBindings();
+    configureAutoPicker();
+  }
+
+  public void configureAutoPicker(){
+    autoPicker.setDefaultOption("Drive Backwards", new DriveBackwardsAutoCableBerm());
+    autoPicker.addOption("Mid Cube - NO drive", new MidCubeAuto());
+    autoPicker.addOption("Mid Cube - YES Drive", new MidCubeNoBerm());
+    autoPicker.addOption("High Cube - NO Drive", new HighCube());
+    autoPicker.addOption("High Cube - YES Drive", new HighCubeNoBerm());
+    SmartDashboard.putData(autoPicker);
   }
 
   public void initilizeSubsystems(){
@@ -60,6 +73,7 @@ public class RobotContainer {
     wrist = WristSubsystem.getInstance();
     intake = IntakeSubsystem.getInstance();
     blinkin = BlinkinSubsystem.getInstance();
+    autoPicker = new SendableChooser<>();
   }
 
   public void initilizePowerDistrubutionBoard(){
@@ -91,8 +105,9 @@ public class RobotContainer {
 
   } 
   public Command getAutonomousCommand() {
-    return new NewScoreAuto();
+    return autoPicker.getSelected();
   }
+
 
 
 }
