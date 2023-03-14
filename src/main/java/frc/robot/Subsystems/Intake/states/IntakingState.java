@@ -17,4 +17,9 @@ public class IntakingState extends CommandBase {
     intake.setPower(IntakeConstants.INTAKING_SPEED);
   }
 
+  @Override
+  public void end(boolean interrupted) {
+      intake.setPower(0);
+  }
+
 }
