@@ -23,10 +23,10 @@ import frc.robot.Subsystems.Intake.IntakeSubsystem;
 import frc.robot.Subsystems.Intake.states.ManualIntakeState;
 import frc.robot.Subsystems.Wrist.WristSubsystem;
 import frc.robot.Subsystems.Wrist.states.ManualWristState;
-import frc.robot.commands.HighCubeWithChargingStation;
 import frc.robot.commands.autonomous.DriveBackwardsAutoCableBerm;
 import frc.robot.commands.autonomous.HighCube;
 import frc.robot.commands.autonomous.HighCubeNoBerm;
+import frc.robot.commands.autonomous.HighCubeFaster;
 import frc.robot.commands.autonomous.MidCubeAuto;
 import frc.robot.commands.autonomous.MidCubeNoBerm;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -65,7 +65,7 @@ public class RobotContainer {
     autoPicker.addOption("Mid Cube - YES Drive", new MidCubeNoBerm());
     autoPicker.addOption("High Cube - NO Drive", new HighCube());
     autoPicker.addOption("High Cube - YES Drive", new HighCubeNoBerm());
-    autoPicker.addOption("High Cube - Charging Station", new HighCubeWithChargingStation());
+    autoPicker.addOption("High Cube - Charging Station", new HighCubeFaster());
     SmartDashboard.putData(autoPicker);
   }
 
