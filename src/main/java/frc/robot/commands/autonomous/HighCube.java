@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Subsystems.Arm.states.MoveElbowState;
 import frc.robot.Subsystems.Arm.states.MoveShoulderToPotTarget;
+import frc.robot.Subsystems.Arm.states.StopIntakeState;
 import frc.robot.Subsystems.Arm.states.StopShoulderState;
 import frc.robot.Subsystems.Intake.states.IntakingState;
 import frc.robot.Subsystems.Wrist.states.MoveWristState;
@@ -26,18 +27,23 @@ public class HighCube extends SequentialCommandGroup {
     new MoveShoulderToPotTarget(ArmConstants.SHOULDER_HIGH_CUBE_POT_VALUE).withTimeout(1),
 
     // Lift Elbow
-    new MoveElbowState(EblowMovement.RAISE).withTimeout(1.4),
+    new MoveElbowState(EblowMovement.RAISE).withTimeout(1.6),
     new MoveElbowState(EblowMovement.STOP).withTimeout(0.05),
 
     // Articulate wrist
-    new MoveWristState(WristFlexionPosition.LOWER).withTimeout(0.375),
+    new MoveWristState(WristFlexionPosition.LOWER).withTimeout(0.3),
     new MoveWristState(WristFlexionPosition.STOP).withTimeout(0.5),
 
     // Spit out
     new IntakingState().withTimeout(1.0),
+    new StopIntakeState().withTimeout(0.05),
+
+    // Reset Wrist
+    new MoveWristState(WristFlexionPosition.RAISE).withTimeout(0.375),
+    new MoveWristState(WristFlexionPosition.STOP).withTimeout(0.5),
 
     // Lower Elbow
-    new MoveElbowState(EblowMovement.LOWER).withTimeout(1.4),
+    new MoveElbowState(EblowMovement.LOWER).withTimeout(1.6),
     new MoveElbowState(EblowMovement.STOP).withTimeout(0.05),
 
     // Lower shoulder

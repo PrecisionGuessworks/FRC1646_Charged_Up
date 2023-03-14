@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Subsystems.Arm.states.MoveElbowState;
 import frc.robot.Subsystems.Arm.states.RaiseShoulderState;
 import frc.robot.Subsystems.Arm.states.StopElbowState;
+import frc.robot.Subsystems.Arm.states.StopIntakeState;
 import frc.robot.Subsystems.Arm.states.StopShoulderState;
 import frc.robot.Subsystems.Arm.states.MoveShoulderToPotTarget;
 import frc.robot.Subsystems.Arm.states.RaiseElbowState;
@@ -44,6 +45,11 @@ public class MidCubeAuto extends SequentialCommandGroup {
 
       // Spit out
       new IntakingState().withTimeout(1.0),
+      new StopIntakeState().withTimeout(0.05),
+
+      // Reset Wrist
+      new MoveWristState(WristFlexionPosition.RAISE).withTimeout(0.375),
+      new MoveWristState(WristFlexionPosition.STOP).withTimeout(0.5),
 
       // Lower Elbow
       new MoveElbowState(EblowMovement.LOWER).withTimeout(1.4),
