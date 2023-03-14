@@ -26,7 +26,7 @@ public class Constants {
       public static final double SHOULDER_SLEW_RATE_LIMIT = 0.75;
       public static final int SHOULDER_POT_OFFSET = -25;
 
-      public static final double SHOULDER_HIGH_CUBE_POT_VALUE = 15;
+      public static final double SHOULDER_HIGH_CUBE_POT_VALUE = 16;
       public static final double SHOULDER_MID_CUBE_POT_VALUE = 15;
       public static final double SHOULDER_STOWED_POT_VALUE = -8;
       public static final double SHOULDER_POT_TOLERANCE = 1;
