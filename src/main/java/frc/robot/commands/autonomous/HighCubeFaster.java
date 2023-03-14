@@ -10,9 +10,11 @@ import frc.robot.Subsystems.Elbow.states.MoveElbowState;
 import frc.robot.Subsystems.Shoulder.states.MoveShoulderToPotTarget;
 import frc.robot.Subsystems.Drivetrain.states.DriveBackwards;
 import frc.robot.Subsystems.Intake.states.IntakingState;
+import frc.robot.Subsystems.Intake.states.StopIntakeState;
 import frc.robot.Subsystems.Wrist.states.MoveWristState;
 import frc.robot.constants.Constants.ArmConstants;
 import frc.robot.constants.Constants.ArmConstants.EblowMovement;
+import frc.robot.constants.Constants.ArmConstants.ShoulderTarget;
 import frc.robot.constants.Constants.WristConstants.WristFlexionPosition;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -24,9 +26,9 @@ public class HighCubeFaster extends SequentialCommandGroup {
     addCommands(
     // Lift Arm
     new ParallelCommandGroup(
-        new MoveShoulderToPotTarget(ArmConstants.SHOULDER_HIGH_CUBE_POT_VALUE).withTimeout(1),
+        new MoveShoulderToPotTarget(ArmConstants.SHOULDER_HIGH_CUBE_POT_VALUE).withTimeout(1.25),
         new MoveElbowState(EblowMovement.RAISE).withTimeout(1.6),
-        new MoveWristState(WristFlexionPosition.LOWER).withTimeout(0.3)
+        new MoveWristState(WristFlexionPosition.LOWER).withTimeout(0.375)
     ),
 
     // Spit out
@@ -40,7 +42,17 @@ public class HighCubeFaster extends SequentialCommandGroup {
     ),
 
     // Drive backwards
-    new DriveBackwards().withTimeout(2)
+    //new DriveBackwards().withTimeout(2)
+
+    // Reach for the floor
+    new ParallelCommandGroup(
+        new MoveShoulderToPotTarget(ShoulderTarget.MED_CUBE).withTimeout(2),
+        new MoveWristState(WristFlexionPosition.LOWER).withTimeout(.9),
+        new MoveElbowState(EblowMovement.RAISE).withTimeout(4),
+        new IntakingState().withTimeout(4)
+    ),
+
+    new StopIntakeState().withTimeout(0.05)
     );
   }
 }

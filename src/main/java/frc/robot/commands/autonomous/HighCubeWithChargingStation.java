@@ -47,10 +47,10 @@ public class HighCubeWithChargingStation extends SequentialCommandGroup {
     new MoveElbowState(EblowMovement.STOP).withTimeout(0.05),
 
     // Lower shoulder
-    new MoveShoulderToPotTarget(ArmConstants.SHOULDER_STOWED_POT_VALUE).withTimeout(1.3),
+    new MoveShoulderToPotTarget(ArmConstants.SHOULDER_STOWED_POT_VALUE).withTimeout(1.3)
 
-    // Drive backwards
-    new DriveBackwards().withTimeout(2)
+    // Drive onto charging station
+
     );
   }
 }

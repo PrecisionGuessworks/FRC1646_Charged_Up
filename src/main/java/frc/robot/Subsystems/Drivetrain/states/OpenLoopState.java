@@ -36,6 +36,7 @@ public class OpenLoopState extends CommandBase {
       throttle *= 0.5;
     }
 
+    drive.printDriveEncoders();
     drive.curvatureDrive(throttle * DriveConstants.THROTTLE_SCALER, rotation * DriveConstants.ROTATION_SCALE);
   }
   

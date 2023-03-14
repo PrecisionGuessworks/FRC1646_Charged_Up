@@ -101,7 +101,7 @@ public class ElbowSubsystem extends SubsystemBase {
     if (isElbowTooHigh(power)) {
       setRawElbowPower(0);
     } else if (isElbowTooLow(power)) {
-      setRawElbowPower(0); // TODO: Be prepared to revert (as a temp change until tweaked)
+      setRawElbowPower(power);
     } else {
       setSlewedElbowPower(power);
     }

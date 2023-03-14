@@ -13,6 +13,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.Constants;
 import frc.robot.constants.RobotMap;
@@ -84,6 +85,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
     backRightMotor.setNeutralMode(mode);
     topLeftMotor.setNeutralMode(mode);
     topRightMotor.setNeutralMode(mode);
+  }
+
+  public void printDriveEncoders(){
+    double[] driveEncoders = {frontLeftMotor.getSelectedSensorPosition(), frontRightMotor.getSelectedSensorPosition()};
+    SmartDashboard.putString("Drive encoders - left", driveEncoders[0] + "");
+    SmartDashboard.putString("Drive encoders - right", driveEncoders[1] + "");
   }
 
   @Override

@@ -29,19 +29,17 @@ public class Constants {
       public static final double SHOULDER_HIGH_CUBE_POT_VALUE = 16;
       public static final double SHOULDER_MID_CUBE_POT_VALUE = 15;
       public static final double SHOULDER_STOWED_POT_VALUE = -8;
-      public static final double SHOULDER_POT_TOLERANCE = 1;
+      public static final double SHOULDER_POT_TOLERANCE = .5;
       public static final double SHOULDER_ENCODER_BOTTOM = 18000;
 
-      // Profiled PID Constants
-      public static final double SHOULDER_CRUISE = 120.0;
-      public static final double SHOULDER_ACCELERAION = 200.0;
-
-      public static final double ELBOW_CRUISE = 120.0;
-      public static final double ELBOW_ACCELERAION = 200.0;
-
-      // Gains
-      public static final Gains GAINS_SHOULDER = new Gains(0.02, 0.0, 0.0, 0.0, 50);
-      public static final Gains GAINS_ELBOW = new Gains(0.02, 0.0, 0.0, 0.0, 50);
+      public static final class ShoulderTarget{
+         public static final double STOWED = -10;
+         public static final double FEEDER = -5;
+         public static final double MED_CUBE = -3.5;
+         public static final double HIGH_CUBE = 3.5;
+         public static final double MED_CONE = 5;
+         public static final double HIGH_CONE = 7;
+      }
 
       // Elbow
       public static final double ELBOW_HIGH_LIMIT = 20000.0;
@@ -55,6 +53,7 @@ public class Constants {
 
       public static final double ELBOW_TRAVEL_DELTA = 10000;
       public static final double ELBOW_LIMIT_SWITCH_DEBOUNCE_TIME = 0.1;
+
       // Stage 1 Config
       public static final double STAGE1_LENGTH = 0.8382; // UNITS: meters
       public static final double STAGE1_MOI = 0.4;

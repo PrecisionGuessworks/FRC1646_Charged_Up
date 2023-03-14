@@ -19,13 +19,18 @@ import frc.robot.Subsystems.Blinkin.BlinkinState;
 import frc.robot.Subsystems.Blinkin.BlinkinSubsystem;
 import frc.robot.Subsystems.Drivetrain.DrivetrainSubsystem;
 import frc.robot.Subsystems.Drivetrain.states.OpenLoopState;
+import frc.robot.Subsystems.Elbow.ElbowSubsystem;
+import frc.robot.Subsystems.Elbow.states.ManualElbowState;
 import frc.robot.Subsystems.Intake.IntakeSubsystem;
 import frc.robot.Subsystems.Intake.states.ManualIntakeState;
+import frc.robot.Subsystems.Shoulder.ShoulderSubsystem;
+import frc.robot.Subsystems.Shoulder.states.ManualShoulderState;
 import frc.robot.Subsystems.Wrist.WristSubsystem;
 import frc.robot.Subsystems.Wrist.states.ManualWristState;
 import frc.robot.commands.autonomous.DriveBackwardsAutoCableBerm;
 import frc.robot.commands.autonomous.HighCube;
 import frc.robot.commands.autonomous.HighCubeNoBerm;
+import frc.robot.commands.autonomous.HighCubeWithChargingStation;
 import frc.robot.commands.autonomous.HighCubeFaster;
 import frc.robot.commands.autonomous.MidCubeAuto;
 import frc.robot.commands.autonomous.MidCubeNoBerm;
@@ -44,7 +49,8 @@ public class RobotContainer {
   SendableChooser<Command> autoPicker;
 
   DrivetrainSubsystem drive;
-  ArmSubsystem arm;
+  ShoulderSubsystem shoulder;
+  ElbowSubsystem elbow;
   WristSubsystem wrist;
   IntakeSubsystem intake;
   PowerDistribution powerDistrubutionBoard;
@@ -60,18 +66,20 @@ public class RobotContainer {
   }
 
   public void configureAutoPicker(){
-    autoPicker.setDefaultOption("Drive Backwards", new DriveBackwardsAutoCableBerm());
-    autoPicker.addOption("Mid Cube - NO drive", new MidCubeAuto());
-    autoPicker.addOption("Mid Cube - YES Drive", new MidCubeNoBerm());
-    autoPicker.addOption("High Cube - NO Drive", new HighCube());
-    autoPicker.addOption("High Cube - YES Drive", new HighCubeNoBerm());
-    autoPicker.addOption("High Cube - Charging Station", new HighCubeFaster());
+    //autoPicker.setDefaultOption("Drive Backwards", new DriveBackwardsAutoCableBerm());
+    // autoPicker.addOption("Mid Cube - NO drive", new MidCubeAuto());
+    // autoPicker.addOption("Mid Cube - YES Drive", new MidCubeNoBerm());
+    // autoPicker.addOption("High Cube - NO Drive", new HighCube());
+    // autoPicker.addOption("High Cube - YES Drive", new HighCubeNoBerm());
+    // autoPicker.addOption("High Cube - Charging Station", new HighCubeWithChargingStation());
+    autoPicker.setDefaultOption("High Cube with Parallel", new HighCubeFaster());
     SmartDashboard.putData(autoPicker);
   }
 
   public void initilizeSubsystems(){
     drive = DrivetrainSubsystem.getInstance();
-    arm = ArmSubsystem.getInstance();
+    shoulder = ShoulderSubsystem.getInstance();
+    elbow = ElbowSubsystem.getInstance();
     wrist = WristSubsystem.getInstance();
     intake = IntakeSubsystem.getInstance();
     blinkin = BlinkinSubsystem.getInstance();
@@ -85,7 +93,8 @@ public class RobotContainer {
 
   public void setAllDefaultCommands(){
     setDefaultCommand(drive, new OpenLoopState());
-    setDefaultCommand(arm, new ManualArmState());
+    setDefaultCommand(shoulder, new ManualShoulderState());
+    setDefaultCommand(elbow, new ManualElbowState());
     setDefaultCommand(wrist, new ManualWristState());
     setDefaultCommand(intake, new ManualIntakeState());
     setDefaultCommand(blinkin, new BlinkinState());

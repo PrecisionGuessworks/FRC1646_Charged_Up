@@ -39,7 +39,6 @@ public class ShoulderSubsystem extends SubsystemBase {
   private SlewRateLimiter shoulderFilter;
   
   private MedianFilter potFilter, encoderFilter;
-  private Debouncer limitSwitchDebouncer;
 
   private double shoulderHoldPosition;
   private boolean haveShoulderPosition;
@@ -112,6 +111,13 @@ public class ShoulderSubsystem extends SubsystemBase {
     } else {
       setShoulderPower(power);
       haveShoulderPosition = false;
+    }
+  }
+
+  public void moveShoulderToPotTarget(double target){
+    if (!isAtTarget(target)){
+      int sign = (getShoulderPosition() > target) ? -1 : 1;
+      setShoulderPower(sign * ArmConstants.SHOULDER_SPEED);
     }
   }
   
