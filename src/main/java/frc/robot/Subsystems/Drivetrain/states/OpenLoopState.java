@@ -14,6 +14,7 @@ public class OpenLoopState extends CommandBase {
   DrivetrainSubsystem drive = DrivetrainSubsystem.getInstance();
   double throttle, rotation;
   boolean halfSpeedRequested = false;
+  boolean yeetRequested = false;
 
   public OpenLoopState() {
     // this.throttle = throttle;
@@ -36,8 +37,15 @@ public class OpenLoopState extends CommandBase {
       throttle *= 0.5;
     }
 
+    if(Controllers.getDriverController().getRawButton(Controllers.PS4_Controller.Button.L1_Bumper)){
+      yeetRequested = true;
+      // TODO: If desired, update throttle value here to eliminate the effects of the scalar
+    } else {
+      yeetRequested = false;
+    }
+
     drive.printDriveEncoders();
-    drive.curvatureDrive(throttle * DriveConstants.THROTTLE_SCALER, rotation * DriveConstants.ROTATION_SCALE);
+    drive.curvatureDrive(throttle * DriveConstants.THROTTLE_SCALER, rotation * DriveConstants.ROTATION_SCALAR, yeetRequested);
   }
   
 }

@@ -56,15 +56,17 @@ public class DrivetrainSubsystem extends SubsystemBase {
     frontRightMotor.set(TalonFXControlMode.PercentOutput, rightPower);
   }
 
-  public void curvatureDrive(double throttle, double rotation){
+  public void curvatureDrive(double throttle, double rotation, boolean yeetRequested){
     boolean quickTurn = true;
     if (throttle > 0.15){
       quickTurn = false;
     }
 
-    throttle = throttleFilter.calculate(throttle); // TODO: Figure out if this should actually go here or not
-    rotation = rotationFilter.calculate(rotation);
-    
+    if (!yeetRequested) {
+      throttle = throttleFilter.calculate(throttle);
+      rotation = rotationFilter.calculate(rotation);
+    }
+        
     //Note: Even though the variable is called wheel speed, this is actually for wheel powers
     WheelSpeeds wheelSpeed = DifferentialDrive.curvatureDriveIK(throttle, rotation, quickTurn);
 

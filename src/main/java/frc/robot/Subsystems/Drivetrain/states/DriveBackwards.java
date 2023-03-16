@@ -15,7 +15,7 @@ public class DriveBackwards extends CommandBase {
 
   @Override
   public void initialize() {
-    drive.curvatureDrive(0.35, 0);
+    drive.curvatureDrive(0.35, 0, false);
   }
 
   @Override
@@ -25,7 +25,7 @@ public class DriveBackwards extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        drive.curvatureDrive(0, 0);
+        drive.curvatureDrive(0, 0, false);
     }
 
 }
