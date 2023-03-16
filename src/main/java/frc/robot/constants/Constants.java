@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Constants {
    public static final class DriveConstants{
     public static final double THROTTLE_SCALER = 0.8;
-    public static final double ROTATION_SCALE = 0.2;
+    public static final double ROTATION_SCALAR = 0.2;
 
     public static final double TS = SmartDashboard.getNumber("Throttle Scalar", 0.8);
 
