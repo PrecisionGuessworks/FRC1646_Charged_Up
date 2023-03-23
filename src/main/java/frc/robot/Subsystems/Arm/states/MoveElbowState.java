@@ -2,26 +2,27 @@ package frc.robot.Subsystems.Arm.states;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.Arm.ArmSubsystem;
+import frc.robot.Subsystems.Elbow.ElbowSubsystem;
 import frc.robot.constants.Constants;
 import frc.robot.constants.Constants.ArmConstants.EblowMovement;
 
 public class MoveElbowState extends CommandBase {
-    private ArmSubsystem arm = ArmSubsystem.getInstance();
+    private ElbowSubsystem elbow = ElbowSubsystem.getInstance();
     private EblowMovement desireMotion;
 
     public MoveElbowState(EblowMovement desireMotion) {
-        addRequirements(arm);
+        addRequirements(elbow);
         this.desireMotion = desireMotion;
     }
 
     @Override
     public void initialize() {
         if (desireMotion == EblowMovement.RAISE){
-            arm.setElbowPowerWithSafeties(Constants.ArmConstants.ELBOW_SPEED);
+            elbow.setElbowPowerWithSafeties(Constants.ArmConstants.ELBOW_SPEED);
         } else if (desireMotion == EblowMovement.LOWER) {
-            arm.setElbowPowerWithSafeties(-1 * Constants.ArmConstants.ELBOW_SPEED);
+            elbow.setElbowPowerWithSafeties(-1 * Constants.ArmConstants.ELBOW_SPEED);
         } else {
-            arm.stopElbow();
+            elbow.stopElbow();
         }
     }
 
@@ -32,6 +33,6 @@ public class MoveElbowState extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        arm.stopElbow();
+        elbow.stopElbow();
     }
 }

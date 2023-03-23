@@ -34,7 +34,7 @@ public class Constants {
 
       public static final class ShoulderTarget{
          public static final double STOWED = -10;
-         public static final double FEEDER = -5;
+         public static final double FEEDER = -6.15;
          public static final double MED_CUBE = -3.5;
          public static final double HIGH_CUBE = 3.5;
          public static final double MED_CONE = 5;

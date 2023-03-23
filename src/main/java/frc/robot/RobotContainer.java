@@ -66,11 +66,11 @@ public class RobotContainer {
   }
 
   public void configureAutoPicker(){
-    //autoPicker.setDefaultOption("Drive Backwards", new DriveBackwardsAutoCableBerm());
+    autoPicker.addOption("Drive Backwards", new DriveBackwardsAutoCableBerm());
     // autoPicker.addOption("Mid Cube - NO drive", new MidCubeAuto());
     // autoPicker.addOption("Mid Cube - YES Drive", new MidCubeNoBerm());
     // autoPicker.addOption("High Cube - NO Drive", new HighCube());
-    // autoPicker.addOption("High Cube - YES Drive", new HighCubeNoBerm());
+    autoPicker.addOption("High Cube - YES Drive", new HighCubeNoBerm());
     // autoPicker.addOption("High Cube - Charging Station", new HighCubeWithChargingStation());
     autoPicker.setDefaultOption("High Cube with Parallel", new HighCubeFaster());
     SmartDashboard.putData(autoPicker);
