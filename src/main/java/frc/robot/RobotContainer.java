@@ -28,12 +28,12 @@ import frc.robot.Subsystems.Shoulder.states.ManualShoulderState;
 import frc.robot.Subsystems.Wrist.WristSubsystem;
 import frc.robot.Subsystems.Wrist.states.ManualWristState;
 import frc.robot.commands.autonomous.DriveBackwardsAutoCableBerm;
-import frc.robot.commands.autonomous.HighCube;
-import frc.robot.commands.autonomous.HighCubeNoBerm;
+import frc.robot.commands.autonomous.HighCubeNoDrive;
+import frc.robot.commands.autonomous.HighCubeYesDrive;
 import frc.robot.commands.autonomous.HighCubeWithChargingStation;
 import frc.robot.commands.autonomous.HighCubeFaster;
-import frc.robot.commands.autonomous.MidCubeAuto;
-import frc.robot.commands.autonomous.MidCubeNoBerm;
+import frc.robot.commands.autonomous.MidCubeAutoNoDrive;
+import frc.robot.commands.autonomous.MidCubeYesDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -67,11 +67,11 @@ public class RobotContainer {
 
   public void configureAutoPicker(){
     autoPicker.addOption("Drive Backwards", new DriveBackwardsAutoCableBerm());
-    // autoPicker.addOption("Mid Cube - NO drive", new MidCubeAuto());
-    // autoPicker.addOption("Mid Cube - YES Drive", new MidCubeNoBerm());
-    // autoPicker.addOption("High Cube - NO Drive", new HighCube());
-    autoPicker.addOption("High Cube - YES Drive", new HighCubeNoBerm());
-    // autoPicker.addOption("High Cube - Charging Station", new HighCubeWithChargingStation());
+    autoPicker.addOption("Mid Cube - NO drive", new MidCubeAutoNoDrive());
+    autoPicker.addOption("Mid Cube - YES Drive", new MidCubeYesDrive());
+    autoPicker.addOption("High Cube - NO Drive", new HighCubeNoDrive());
+    autoPicker.addOption("High Cube - YES Drive", new HighCubeYesDrive());
+    autoPicker.addOption("High Cube - Charging Station", new HighCubeWithChargingStation());
     autoPicker.setDefaultOption("High Cube with Parallel", new HighCubeFaster());
     SmartDashboard.putData(autoPicker);
   }

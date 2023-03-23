@@ -25,10 +25,10 @@ import frc.robot.constants.Constants.WristConstants.WristFlexionPosition;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class MidCubeAuto extends SequentialCommandGroup {
+public class MidCubeAutoNoDrive extends SequentialCommandGroup {
   /** Creates a new ScoreAndDriveBackwards. */
 
-  public MidCubeAuto() {
+  public MidCubeAutoNoDrive() {
     addCommands(
       // Life Shoulder
       new MoveShoulderToPotTarget(ArmConstants.SHOULDER_MID_CUBE_POT_VALUE).withTimeout(0.5),

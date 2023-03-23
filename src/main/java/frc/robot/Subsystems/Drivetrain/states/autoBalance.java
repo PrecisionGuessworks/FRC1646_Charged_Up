@@ -14,6 +14,7 @@ public class autoBalance {
     private double singleTapTime;
     private double scoringBackUpTime;
     private double doubleTapTime;
+    
 
     public autoBalance() {
         mRioAccel = new BuiltInAccelerometer();

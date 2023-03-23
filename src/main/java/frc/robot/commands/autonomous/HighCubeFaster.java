@@ -56,3 +56,17 @@ public class HighCubeFaster extends SequentialCommandGroup {
     );
   }
 }
+
+
+
+// Obsolete for floor pickup of cube
+
+// Reach for the floor
+// new ParallelCommandGroup(
+//   new MoveShoulderToPotTarget(ShoulderTarget.MED_CUBE).withTimeout(2),
+//   new MoveWristState(WristFlexionPosition.LOWER).withTimeout(.9),
+//   new MoveElbowState(EblowMovement.RAISE).withTimeout(4),
+//   new IntakingState().withTimeout(4)
+// ),
+
+// new StopIntakeState().withTimeout(0.05)

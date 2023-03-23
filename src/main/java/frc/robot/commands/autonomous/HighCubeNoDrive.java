@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Subsystems.Arm.states.MoveElbowState;
 import frc.robot.Subsystems.Arm.states.MoveShoulderToPotTarget;
 import frc.robot.Subsystems.Arm.states.StopShoulderState;
-import frc.robot.Subsystems.Drivetrain.states.DriveBackwards;
 import frc.robot.Subsystems.Intake.states.IntakingState;
 import frc.robot.Subsystems.Intake.states.StopIntakeState;
 import frc.robot.Subsystems.Wrist.states.MoveWristState;
@@ -20,9 +19,9 @@ import frc.robot.constants.Constants.WristConstants.WristFlexionPosition;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class HighCubeNoBerm extends SequentialCommandGroup {
+public class HighCubeNoDrive extends SequentialCommandGroup {
   /** Creates a new NewScoreAuto. */
-  public HighCubeNoBerm() {
+  public HighCubeNoDrive() {
     addCommands(
     // Lift Shoulder
     new MoveShoulderToPotTarget(ArmConstants.SHOULDER_HIGH_CUBE_POT_VALUE).withTimeout(1),
@@ -48,10 +47,8 @@ public class HighCubeNoBerm extends SequentialCommandGroup {
     new MoveElbowState(EblowMovement.STOP).withTimeout(0.05),
 
     // Lower shoulder
-    new MoveShoulderToPotTarget(ArmConstants.SHOULDER_STOWED_POT_VALUE).withTimeout(1.3),
+    new MoveShoulderToPotTarget(ArmConstants.SHOULDER_STOWED_POT_VALUE).withTimeout(1)
 
-    // Drive backwards
-    new DriveBackwards().withTimeout(3.75)
     );
   }
 }
