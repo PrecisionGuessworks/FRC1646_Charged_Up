@@ -18,9 +18,9 @@ import frc.robot.constants.Constants.WristConstants.WristFlexionPosition;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class HighCubeWithChargingStation extends SequentialCommandGroup {
+public class HighCubeObsolete extends SequentialCommandGroup {
   /** Creates a new HighCubeWithChargingStation. */
-  public HighCubeWithChargingStation() {
+  public HighCubeObsolete() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(// Lift Shoulder

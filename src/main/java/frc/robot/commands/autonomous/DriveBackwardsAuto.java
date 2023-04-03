@@ -11,17 +11,13 @@ import frc.robot.Subsystems.Drivetrain.states.DriveBackwards;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class DriveBackwardsAutoCableBerm extends SequentialCommandGroup {
+public class DriveBackwardsAuto extends SequentialCommandGroup {
   /** Creates a new DriveBackwards. */
-  public DriveBackwardsAutoCableBerm() {
+  public DriveBackwardsAuto() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        // Arm unfold
-        // spit out
-        // drive backwards
         new DriveBackwards().withTimeout(3.25)
-
     );
   }
 }

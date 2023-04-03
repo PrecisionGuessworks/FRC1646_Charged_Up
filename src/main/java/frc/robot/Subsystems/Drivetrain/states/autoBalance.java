@@ -1,6 +1,9 @@
 package frc.robot.Subsystems.Drivetrain.states;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import frc.robot.Subsystems.Drivetrain.DrivetrainSubsystem;
 
 public class autoBalance {
     private BuiltInAccelerometer mRioAccel;
@@ -25,12 +28,12 @@ public class autoBalance {
          * CONFIG *
          **********/
         // Speed the robot drived while scoring/approaching station, default = 0.4
-        robotSpeedFast = 0.4;
+        robotSpeedFast = 0.45;
 
         // Speed the robot drives while balancing itself on the charge station.
         // Should be roughly half the fast speed, to make the robot more accurate,
         // default = 0.2
-        robotSpeedSlow = 0.2;
+        robotSpeedSlow = 0.125;
 
         // Angle where the robot knows it is on the charge station, default = 13.0
         onChargeStationDegree = 13.0;
@@ -38,7 +41,7 @@ public class autoBalance {
         // Angle where the robot can assume it is level on the charging station
         // Used for exiting the drive forward sequence as well as for auto balancing,
         // default = 6.0
-        levelDegree = 6.0;
+        levelDegree = 8.0;
 
         // Amount of time a sensor condition needs to be met before changing states in
         // seconds
@@ -61,24 +64,17 @@ public class autoBalance {
     }
 
     public double getPitch() {
-        return Math.atan2((-mRioAccel.getX()),
-                Math.sqrt(mRioAccel.getY() * mRioAccel.getY() + mRioAccel.getZ() * mRioAccel.getZ())) * 57.3;
+        return DrivetrainSubsystem.getInstance().getPitch();
     }
 
     public double getRoll() {
-        return Math.atan2(mRioAccel.getY(), mRioAccel.getZ()) * 57.3;
+        return DrivetrainSubsystem.getInstance().getRoll();
     }
 
     // returns the magnititude of the robot's tilt calculated by the root of
     // pitch^2 + roll^2, used to compensate for diagonally mounted rio
     public double getTilt() {
-        double pitch = getPitch();
-        double roll = getRoll();
-        if ((pitch + roll) >= 0) {
-            return Math.sqrt(pitch * pitch + roll * roll);
-        } else {
-            return -Math.sqrt(pitch * pitch + roll * roll);
-        }
+        return getRoll();
     }
 
     public int secondsToTicks(double time) {

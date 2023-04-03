@@ -27,11 +27,11 @@ import frc.robot.Subsystems.Shoulder.ShoulderSubsystem;
 import frc.robot.Subsystems.Shoulder.states.ManualShoulderState;
 import frc.robot.Subsystems.Wrist.WristSubsystem;
 import frc.robot.Subsystems.Wrist.states.ManualWristState;
-import frc.robot.commands.autonomous.DriveBackwardsAutoCableBerm;
+import frc.robot.commands.autonomous.DriveBackwardsAuto;
 import frc.robot.commands.autonomous.HighCubeNoDrive;
 import frc.robot.commands.autonomous.HighCubeYesDrive;
-import frc.robot.commands.autonomous.HighCubeWithChargingStation;
-import frc.robot.commands.autonomous.HighCubeFaster;
+import frc.robot.commands.autonomous.HighCubeObsolete;
+import frc.robot.commands.autonomous.HighCubeWithBalance;
 import frc.robot.commands.autonomous.MidCubeAutoNoDrive;
 import frc.robot.commands.autonomous.MidCubeYesDrive;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -66,13 +66,12 @@ public class RobotContainer {
   }
 
   public void configureAutoPicker(){
-    autoPicker.addOption("Drive Backwards", new DriveBackwardsAutoCableBerm());
+    autoPicker.addOption("Drive Backwards", new DriveBackwardsAuto());
     autoPicker.addOption("Mid Cube - NO drive", new MidCubeAutoNoDrive());
     autoPicker.addOption("Mid Cube - YES Drive", new MidCubeYesDrive());
     autoPicker.addOption("High Cube - NO Drive", new HighCubeNoDrive());
     autoPicker.addOption("High Cube - YES Drive", new HighCubeYesDrive());
-    autoPicker.addOption("High Cube - Charging Station", new HighCubeWithChargingStation());
-    autoPicker.setDefaultOption("High Cube with Parallel", new HighCubeFaster());
+    autoPicker.setDefaultOption("High Cube - Balance (Parallel)", new HighCubeWithBalance());
     SmartDashboard.putData(autoPicker);
   }
 

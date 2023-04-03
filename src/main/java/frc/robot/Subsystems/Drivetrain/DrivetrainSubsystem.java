@@ -8,9 +8,11 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,6 +31,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   private static DrivetrainSubsystem instance;
 
+  private AHRS navxGyro;
+
   private DrivetrainSubsystem() {
     frontLeftMotor = TalonFXFactory.makeTalonFX(RobotMap.DRIVETRAIN_LEFT_FRONT_ID, TalonFXInvertType.Clockwise, new PIDConfig(0.0, 0.0, 0.0, 0.0));
     topLeftMotor = TalonFXFactory.makeFollowerTalonFX(RobotMap.DRIVETRAIN_LEFT_TOP_ID, frontLeftMotor);
@@ -42,6 +46,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     throttleFilter = new SlewRateLimiter(Constants.DriveConstants.POSITIVE_SLEW_RATE_LIMIT, Constants.DriveConstants.NEGATIVE_SLEW_RATE_LIMIT, 0);
     rotationFilter = new SlewRateLimiter(0.95);
+
+    navxGyro = new AHRS(Port.kMXP);
+    navxGyro.calibrate();
   }
 
   public static synchronized DrivetrainSubsystem getInstance(){
@@ -95,8 +102,24 @@ public class DrivetrainSubsystem extends SubsystemBase {
     SmartDashboard.putString("Drive encoders - right", driveEncoders[1] + "");
   }
 
+  public double getPitch(){
+    return navxGyro.getPitch();
+  }
+  public double getRoll(){
+    return navxGyro.getRoll();
+  }
+  public double getYaw(){
+    return navxGyro.getYaw();
+  }
+  public void printGyroToDashboard(){
+    SmartDashboard.putNumber("Gyro Pitch", getPitch());
+    SmartDashboard.putNumber("Gyro Roll", getRoll());
+    SmartDashboard.putNumber("Gyro Yaw", getYaw());
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    printGyroToDashboard();
   }
 }
