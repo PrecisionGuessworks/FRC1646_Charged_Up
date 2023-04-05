@@ -33,12 +33,12 @@ public class Constants {
       public static final double SHOULDER_ENCODER_BOTTOM = 18000;
 
       public static final class ShoulderTarget{
-         public static final double STOWED = -10;
-         public static final double FEEDER = -6.15;
-         public static final double MED_CUBE = -3.5;
-         public static final double HIGH_CUBE = 3.5;
-         public static final double MED_CONE = 5;
-         public static final double HIGH_CONE = 7;
+         public static final double STOWED = -9;
+         public static final double FEEDER = -5.15;
+         public static final double MED_CUBE = -2.5;
+         public static final double HIGH_CUBE = 4.5;
+         public static final double MED_CONE = 6;
+         public static final double HIGH_CONE = 8;
       }
 
       // Elbow
@@ -107,6 +107,6 @@ public class Constants {
       public static final double INTAKING_SPEED = 0.8;
       public static final double OUTTAKING_SPEED = -0.8;
 
-      public static final int NEO550_CURRENT_LIMIT = 25;
+      public static final int NEO550_CURRENT_LIMIT = 28;
    }
 }

@@ -22,5 +22,6 @@ public class ManualIntakeState extends CommandBase {
         } else {
             intake.setPower(0);
         }
+        intake.displayCurent();
     }
 }

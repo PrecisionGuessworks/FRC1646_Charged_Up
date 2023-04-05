@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.Constants;
 import frc.robot.constants.RobotMap;
@@ -43,6 +44,12 @@ public class IntakeSubsystem extends SubsystemBase {
         rightIntake.set(power);
     }
 
+    public void displayCurent(){
+        double leftCurrent = leftIntake.getOutputCurrent();
+        double rightCurrent = rightIntake.getOutputCurrent();
+        SmartDashboard.putString("Left intake current", leftCurrent + "");
+        SmartDashboard.putString("Right intake current", rightCurrent + "");
+    }
     
     @Override
     public void periodic() {
