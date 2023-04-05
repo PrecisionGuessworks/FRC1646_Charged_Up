@@ -9,7 +9,9 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Subsystems.Elbow.states.MoveElbowState;
 import frc.robot.Subsystems.Shoulder.states.MoveShoulderToPotTarget;
 import frc.robot.Subsystems.Drivetrain.states.Balance;
+import frc.robot.Subsystems.Drivetrain.states.BalanceFromMidField;
 import frc.robot.Subsystems.Drivetrain.states.DriveBackwards;
+import frc.robot.Subsystems.Drivetrain.states.DriveBackwardsWithVigor;
 import frc.robot.Subsystems.Intake.states.IntakingState;
 import frc.robot.Subsystems.Intake.states.StopIntakeState;
 import frc.robot.Subsystems.Wrist.states.MoveWristState;
@@ -21,14 +23,14 @@ import frc.robot.constants.Constants.WristConstants.WristFlexionPosition;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class HighCubeWithBalance extends SequentialCommandGroup {
+public class HighCubeWithMobilityBalance extends SequentialCommandGroup {
   /** Creates a new HighCubeWithChargingStation. */
-  public HighCubeWithBalance() {
+  public HighCubeWithMobilityBalance() {
     addCommands(
     // Lift Arm
     new ParallelCommandGroup(
         new MoveShoulderToPotTarget(ArmConstants.SHOULDER_HIGH_CUBE_POT_VALUE).withTimeout(1.25),
-        new MoveElbowState(EblowMovement.RAISE, false).withTimeout(1.6),
+        new MoveElbowState(EblowMovement.RAISE, true).withTimeout(0.8),
         new MoveWristState(WristFlexionPosition.LOWER).withTimeout(0.375)
     ),
 
@@ -38,12 +40,16 @@ public class HighCubeWithBalance extends SequentialCommandGroup {
     // Reset Arm
     new ParallelCommandGroup(
         new MoveWristState(WristFlexionPosition.RAISE).withTimeout(0.375),
-        new MoveElbowState(EblowMovement.LOWER, false).withTimeout(1.6),
+        new MoveElbowState(EblowMovement.LOWER, true).withTimeout(0.8),
         new MoveShoulderToPotTarget(ArmConstants.SHOULDER_STOWED_POT_VALUE).withTimeout(1.3)
     ),
 
-    // Drive
-    new Balance()
+    // Drive for mobility
+    new DriveBackwardsWithVigor().withTimeout(1.25),
+    new DriveBackwards().withTimeout(1.25),
+
+    // Go for Balance
+    new BalanceFromMidField()
     );
   }
 }
