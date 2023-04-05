@@ -29,7 +29,7 @@ public class HighCubeWithBalance extends SequentialCommandGroup {
     new ParallelCommandGroup(
         new MoveShoulderToPotTarget(ArmConstants.SHOULDER_HIGH_CUBE_POT_VALUE).withTimeout(1.25),
         new MoveElbowState(EblowMovement.RAISE, false).withTimeout(1.6),
-        new MoveWristState(WristFlexionPosition.LOWER).withTimeout(0.375)
+        new MoveWristState(WristFlexionPosition.LOWER).withTimeout(0.575)
     ),
 
     // Spit out

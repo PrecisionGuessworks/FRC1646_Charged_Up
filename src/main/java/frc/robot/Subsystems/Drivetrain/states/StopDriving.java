@@ -7,15 +7,15 @@ package frc.robot.Subsystems.Drivetrain.states;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.Drivetrain.DrivetrainSubsystem;
 
-public class DriveBackwardsWithVigor extends CommandBase {
+public class StopDriving extends CommandBase {
   DrivetrainSubsystem drive = DrivetrainSubsystem.getInstance();
-  public DriveBackwardsWithVigor() {
+  public StopDriving() {
     addRequirements(drive);
   }
 
   @Override
   public void initialize() {
-    drive.curvatureDrive(0.65, 0, false);
+    drive.setPower(0, 0);
   }
 
   @Override
@@ -25,7 +25,7 @@ public class DriveBackwardsWithVigor extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        drive.curvatureDrive(0, 0, false);
+      drive.setPower(0, 0);
     }
 
 }

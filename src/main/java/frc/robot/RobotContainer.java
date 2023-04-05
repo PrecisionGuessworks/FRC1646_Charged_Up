@@ -32,6 +32,7 @@ import frc.robot.commands.autonomous.HighCubeNoDrive;
 import frc.robot.commands.autonomous.HighCubeYesDrive;
 import frc.robot.commands.autonomous.HighCubeObsolete;
 import frc.robot.commands.autonomous.HighCubeWithBalance;
+import frc.robot.commands.autonomous.HighCubeWithMobilityBalance;
 import frc.robot.commands.autonomous.MidCubeAutoNoDrive;
 import frc.robot.commands.autonomous.MidCubeYesDrive;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -72,6 +73,7 @@ public class RobotContainer {
     autoPicker.addOption("High Cube - NO Drive", new HighCubeNoDrive());
     autoPicker.addOption("High Cube - YES Drive", new HighCubeYesDrive());
     autoPicker.setDefaultOption("High Cube - Balance (Parallel)", new HighCubeWithBalance());
+    autoPicker.addOption("High - Balance with Mobility", new HighCubeWithMobilityBalance());
     SmartDashboard.putData(autoPicker);
   }
 

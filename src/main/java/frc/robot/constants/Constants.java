@@ -19,15 +19,15 @@ public class Constants {
       public static final double SHOULDER_HIGH_LIMIT = 26; // 43.5
       public static final double SHOULDER_LOW_LIMIT = -9; // old: 6.8
       public static final double SHOULDER_HOLD_POWER = -0.13;
-      public static final double SHOULDER_SPEED = 0.36;  // 0.36
+      public static final double SHOULDER_SPEED = 0.5;  // 0.36
 
       public static final double SHOULDER_ROTATION_SCALAR = -0.8;
 
       public static final double SHOULDER_SLEW_RATE_LIMIT = 0.75;
       public static final int SHOULDER_POT_OFFSET = -25;
 
-      public static final double SHOULDER_HIGH_CUBE_POT_VALUE = 16;
-      public static final double SHOULDER_MID_CUBE_POT_VALUE = 15;
+      public static final double SHOULDER_HIGH_CUBE_POT_VALUE = 3;
+      public static final double SHOULDER_MID_CUBE_POT_VALUE = 2;
       public static final double SHOULDER_STOWED_POT_VALUE = -8;
       public static final double SHOULDER_POT_TOLERANCE = .5;
       public static final double SHOULDER_ENCODER_BOTTOM = 18000;
