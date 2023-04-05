@@ -8,18 +8,22 @@ import frc.robot.constants.Constants.ArmConstants.EblowMovement;
 public class MoveElbowState extends CommandBase {
     private ElbowSubsystem elbow = ElbowSubsystem.getInstance();
     private EblowMovement desireMotion;
+    double elbowSpeed = Constants.ArmConstants.ELBOW_SPEED;
 
-    public MoveElbowState(EblowMovement desireMotion) {
+    public MoveElbowState(EblowMovement desireMotion, boolean speedMode) {
         addRequirements(elbow);
         this.desireMotion = desireMotion;
+        if (speedMode) {
+            elbowSpeed = Constants.ArmConstants.ELBOW_SPEED_QUICK;
+        }
     }
 
     @Override
     public void initialize() {
         if (desireMotion == EblowMovement.RAISE){
-            elbow.setElbowPowerWithSafeties(Constants.ArmConstants.ELBOW_SPEED);
+            elbow.setElbowPowerWithSafeties(elbowSpeed);
         } else if (desireMotion == EblowMovement.LOWER) {
-            elbow.setElbowPowerWithSafeties(-1 * Constants.ArmConstants.ELBOW_SPEED);
+            elbow.setElbowPowerWithSafeties(-1 * elbowSpeed);
         } else {
             elbow.stopElbow();
         }
