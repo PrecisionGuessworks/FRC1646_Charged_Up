@@ -108,6 +108,6 @@ public class Constants {
       public static final double INTAKING_SPEED = 0.8;
       public static final double OUTTAKING_SPEED = -0.8;
 
-      public static final int NEO550_CURRENT_LIMIT = 28;
+      public static final int NEO550_CURRENT_LIMIT = 20;
    }
 }

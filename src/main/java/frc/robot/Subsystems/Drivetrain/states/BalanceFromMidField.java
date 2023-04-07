@@ -25,6 +25,7 @@ public class BalanceFromMidField extends CommandBase {
   @Override
   public void execute() {
     double speed = balance.autoBalanceRoutine();
+
     drivetrain.setPower(speed, speed);
   }
 

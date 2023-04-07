@@ -13,6 +13,7 @@ import frc.robot.Subsystems.Drivetrain.states.Balance;
 import frc.robot.Subsystems.Drivetrain.states.BalanceFromMidField;
 import frc.robot.Subsystems.Drivetrain.states.DriveBackwards;
 import frc.robot.Subsystems.Drivetrain.states.DriveBackwardsWithCaution;
+import frc.robot.Subsystems.Drivetrain.states.DriveForwards;
 import frc.robot.Subsystems.Drivetrain.states.StopDriving;
 import frc.robot.Subsystems.Intake.states.IntakingState;
 import frc.robot.Subsystems.Intake.states.StopIntakeState;
@@ -47,10 +48,10 @@ public class HighCubeWithMobilityBalance extends SequentialCommandGroup {
     ),
 
     // Drive for mobility
-    new DriveBackwards().withTimeout(4),
+    new DriveBackwards().withTimeout(3.5),
     new DriveBackwardsWithCaution().withTimeout(0.75),
     new StopDriving().withTimeout(0.5),
-
+    new DriveForwards().withTimeout(0.25),
 
     // Go for Balance
     new BalanceFromMidField()

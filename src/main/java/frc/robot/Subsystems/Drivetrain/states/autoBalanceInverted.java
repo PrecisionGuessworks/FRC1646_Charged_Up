@@ -28,7 +28,7 @@ public class autoBalanceInverted {
          * CONFIG *
          **********/
         // Speed the robot drived while scoring/approaching station, default = 0.4
-        robotSpeedFast = -0.45;
+        robotSpeedFast = -0.25;
 
         // Speed the robot drives while balancing itself on the charge station.
         // Should be roughly half the fast speed, to make the robot more accurate,
@@ -52,7 +52,7 @@ public class autoBalanceInverted {
         // Amount of time to drive towards to scoring target when trying to bump the
         // game piece off
         // Time it takes to go from starting position to hit the scoring target
-        singleTapTime = 0.4;
+        singleTapTime = 0.2;
 
         // Amount of time to drive away from knocked over gamepiece before the second
         // tap
@@ -88,7 +88,7 @@ public class autoBalanceInverted {
         switch (state) {
             // drive forwards to approach station, exit when tilt is detected
             case 0:
-                if (getTilt() > onChargeStationDegree) {
+                if (getTilt() < onChargeStationDegree) {
                     debounceCount++;
                 }
                 if (debounceCount > secondsToTicks(debounceTime)) {
@@ -99,7 +99,7 @@ public class autoBalanceInverted {
                 return robotSpeedFast;
             // driving up charge station, drive slower, stopping when level
             case 1:
-                if (getTilt() < levelDegree) {
+                if (getTilt() > levelDegree) {
                     debounceCount++;
                 }
                 if (debounceCount > secondsToTicks(debounceTime)) {
@@ -119,9 +119,9 @@ public class autoBalanceInverted {
                     return 0;
                 }
                 if (getTilt() >= levelDegree) {
-                    return -0.1;
-                } else if (getTilt() <= -levelDegree) {
                     return 0.1;
+                } else if (getTilt() <= -levelDegree) {
+                    return -0.1;
                 }
             case 3:
                 return 0;
