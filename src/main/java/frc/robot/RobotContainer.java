@@ -73,7 +73,7 @@ public class RobotContainer {
     autoPicker.addOption("High Cube - NO Drive", new HighCubeNoDrive());
     autoPicker.addOption("High Cube - YES Drive", new HighCubeYesDrive());
     autoPicker.setDefaultOption("High Cube - Balance (Parallel)", new HighCubeWithBalance());
-    autoPicker.addOption("High - Balance with Mobility", new HighCubeWithMobilityBalance());
+    //autoPicker.addOption("High - Balance with Mobility", new HighCubeWithMobilityBalance());
     SmartDashboard.putData(autoPicker);
   }
 

@@ -50,7 +50,7 @@ public class HighCubeWithMobilityBalance extends SequentialCommandGroup {
     // Drive for mobility
     new DriveBackwards().withTimeout(3.5),
     new DriveBackwardsWithCaution().withTimeout(0.75),
-    new StopDriving().withTimeout(0.5),
+    new StopDriving().withTimeout(0.25),
     new DriveForwards().withTimeout(0.25),
 
     // Go for Balance

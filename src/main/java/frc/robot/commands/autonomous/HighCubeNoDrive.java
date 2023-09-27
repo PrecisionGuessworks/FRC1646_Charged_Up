@@ -27,7 +27,7 @@ public class HighCubeNoDrive extends SequentialCommandGroup {
     new MoveShoulderToPotTarget(ArmConstants.SHOULDER_HIGH_CUBE_POT_VALUE).withTimeout(1),
 
     // Lift Elbow
-    new MoveElbowState(EblowMovement.RAISE).withTimeout(1.6),
+    new MoveElbowState(EblowMovement.RAISE).withTimeout(2),
     new MoveElbowState(EblowMovement.STOP).withTimeout(0.05),
 
     // Articulate wrist

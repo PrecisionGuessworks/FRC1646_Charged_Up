@@ -41,7 +41,7 @@ public class autoBalanceInverted {
         // Angle where the robot can assume it is level on the charging station
         // Used for exiting the drive forward sequence as well as for auto balancing,
         // default = 6.0
-        levelDegree = -8.0;
+        levelDegree = -6.0;
 
         // Amount of time a sensor condition needs to be met before changing states in
         // seconds
@@ -110,7 +110,7 @@ public class autoBalanceInverted {
                 return robotSpeedSlow;
             // on charge station, stop motors and wait for end of auto
             case 2:
-                if (Math.abs(getTilt()) <= levelDegree / 2) {
+                if (Math.abs(getTilt()) <= -levelDegree / 2) {
                     debounceCount++;
                 }
                 if (debounceCount > secondsToTicks(debounceTime)) {
@@ -118,10 +118,10 @@ public class autoBalanceInverted {
                     debounceCount = 0;
                     return 0;
                 }
-                if (getTilt() >= levelDegree) {
-                    return 0.1;
-                } else if (getTilt() <= -levelDegree) {
+                if (getTilt() <= levelDegree) {
                     return -0.1;
+                } else if (getTilt() >= -levelDegree) {
+                    return 0.1;
                 }
             case 3:
                 return 0;

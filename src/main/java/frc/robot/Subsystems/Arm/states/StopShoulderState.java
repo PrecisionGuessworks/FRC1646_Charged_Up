@@ -12,7 +12,7 @@ public class StopShoulderState extends CommandBase {
     @Override
     public void initialize() {
         arm.setShoulderPower(0);
-        System.out.println("Hello from Stop Shoulder");
+        //System.out.println("Hello from Stop Shoulder");
     }
 
     @Override

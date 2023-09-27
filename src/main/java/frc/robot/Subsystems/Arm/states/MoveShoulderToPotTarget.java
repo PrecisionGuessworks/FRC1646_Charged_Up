@@ -22,17 +22,17 @@ public class MoveShoulderToPotTarget extends CommandBase {
     public void execute(){
         sign = (currentPot > potTarget) ? -1 : 1;
         shoulder.setShoulderPowerWithSafeties(sign * Constants.ArmConstants.SHOULDER_SPEED);
-        System.out.println("Shoulder target status: " + shoulder.isAtTarget(potTarget));
+        //System.out.println("Shoulder target status: " + shoulder.isAtTarget(potTarget));
     }
 
     public boolean isFinished(){
-        System.out.println("Shoulder target status: " + shoulder.isAtTarget(potTarget));
+        //System.out.println("Shoulder target status: " + shoulder.isAtTarget(potTarget));
         return shoulder.isAtTarget(potTarget);
     }
 
     @Override
     public void end(boolean interrupted){
         shoulder.stopShoulder();
-        System.out.println("MoveShouderToPotTarget Ended");
+        //System.out.println("MoveShouderToPotTarget Ended");
     }
 }

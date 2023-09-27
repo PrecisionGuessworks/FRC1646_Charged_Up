@@ -67,8 +67,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
     boolean quickTurn = true;
     if (throttle > 0.15){
       quickTurn = false;
-    } else {
-      rotation *= 2;
     }
 
     if (!yeetRequested) {
